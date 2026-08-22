@@ -1,16 +1,16 @@
 {
   "name": {
-    "ko": "주식 계산기",
-    "en": "Stock Calculator",
-    "ja": "株式計算機",
-    "zh-CN": "股票计算器",
-    "zh-TW": "股票計算機",
-    "es": "Calculadora de acciones",
-    "de": "Aktienrechner",
-    "fr": "Calculatrice d’actions",
-    "it": "Calcolatrice per azioni",
-    "pt-BR": "Calculadora de ações",
-    "id": "Kalkulator Saham"
+    "ko": "물타기 계산기",
+    "en": "Average Down Calculator",
+    "de": "Nachkauf-Rechner",
+    "es": "Calculadora de promedio",
+    "fr": "Calculateur de prix moyen",
+    "it": "Calcolatore prezzo medio",
+    "ja": "ナンピン計算機",
+    "id": "Kalkulator Harga Rata-Rata",
+    "pt-BR": "Calculadora de Preço Médio",
+    "zh-CN": "补仓计算器",
+    "zh-TW": "攤平計算機"
   },
   "description": {
     "ko": "평단가와 목표가를 손끝에서 계산하는 앱.",
