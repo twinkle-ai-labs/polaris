@@ -22,7 +22,7 @@ export async function generateMetadata({
 }) {
   const { app, doc, locale } = await params;
   const version = currentVersion(app, doc, locale);
-  const meta = readApp(app);
+  const meta = readApp(app, locale);
   return { title: version && meta ? `${version.title} — ${meta.name}` : "약관" };
 }
 
@@ -32,7 +32,7 @@ export default async function DocLocalePage({
   params: Promise<{ app: string; doc: string; locale: string }>;
 }) {
   const { app, doc, locale } = await params;
-  const appMeta = readApp(app);
+  const appMeta = readApp(app, locale);
   const docMeta = readDoc(app, doc);
   const version = currentVersion(app, doc, locale);
   if (!appMeta || !docMeta || !version) notFound();

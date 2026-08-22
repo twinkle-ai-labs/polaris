@@ -10,6 +10,7 @@ import {
   listDocs,
   pastVersions,
   publishedLocales,
+  readApp,
   readSite,
   upcomingVersion,
 } from "../src/lib/content.mjs";
@@ -54,8 +55,14 @@ for (const app of apps) {
 
     for (const locale of locales) {
       const current = currentVersion(app.slug, doc.slug, locale);
+      /*
+       * 앱 이름은 **그 로케일의 것**이어야 한다. `app` 은 바깥에서 한 번 읽은 것이라
+       * 기본 언어(ko)의 이름을 들고 있다 — 그대로 실으면 독일어 약관 payload 에
+       * «주식 계산기» 가 실린다. 이름은 이미 열한 벌 있는데 아무도 안 고르고 있었다.
+       */
+      const named = readApp(app.slug, locale) ?? app;
       write(`apps/${app.slug}/${doc.slug}/${locale}.json`, {
-        app: { slug: app.slug, name: app.name },
+        app: { slug: app.slug, name: named.name },
         doc: { slug: doc.slug, name: doc.name, kind: doc.kind },
         ...versionPayload(current),
         format: "markdown",

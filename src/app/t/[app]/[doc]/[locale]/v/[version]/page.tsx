@@ -39,7 +39,7 @@ export default async function VersionPage({
   params: Promise<{ app: string; doc: string; locale: string; version: string }>;
 }) {
   const { app, doc, locale, version } = await params;
-  const appMeta = readApp(app);
+  const appMeta = readApp(app, locale);
   const docMeta = readDoc(app, doc);
   const found = readVersion(app, doc, locale, Number(version));
   if (!appMeta || !docMeta || !found || found.status !== "published") notFound();
