@@ -95,27 +95,30 @@
 }
 
 .footerInner {
+  position: relative;
+  z-index: 1;
   max-width: var(--shell);
   margin: 0 auto;
-  padding: var(--s5) var(--s2);
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s2);
-  justify-content: space-between;
-  align-items: center;
-  color: var(--text-faint);
-  font-size: var(--fs-12);
+  padding: var(--s7) var(--s2) var(--s4);
 }
 
-.footerLine { margin: 0; }
-.footerLink { color: var(--text-sub); font-weight: var(--fw-medium); }
+.footerTop { display: grid; gap: var(--s4); align-items: start; }
+.footerBrand { max-width: 34rem; }
+.footerName { display: flex; align-items: center; gap: var(--s1); color: var(--text); font-size: var(--fs-16); font-weight: var(--fw-bold); letter-spacing: var(--tr-snug); }
+.footerStar { width: 0.875rem; height: 0.875rem; color: var(--accent); }
+.footerLine { max-width: 30rem; margin-top: var(--s1h); color: var(--text-sub); font-size: var(--fs-14); line-height: var(--lh-body); }
+.footerColumn { display: flex; flex-direction: column; gap: var(--s1h); }
+.footerHeading { color: var(--text-faint); font-size: var(--fs-11); font-weight: var(--fw-bold); letter-spacing: var(--tr-wide); text-transform: uppercase; }
+.footerLink { color: var(--text-sub); font-weight: var(--fw-semibold); }
+.footerLink:hover { color: var(--accent); text-decoration: none; }
 
 /* 운영자 이름과 메일은 한 덩이로 선다 — 둘 다 «누가 여는 집인가»를 말한다. */
 .footerOperator {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--s0) var(--s1h);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s1);
+  font-size: var(--fs-12);
 }
 
 .operatorName { color: var(--text-faint); font-weight: var(--fw-semibold); }
@@ -123,7 +126,7 @@
 @media (min-width: 48em) {
   .headerInner, .main, .footerInner { padding-left: var(--s3); padding-right: var(--s3); }
   .main { padding-top: var(--s6); }
-  .footerInner { padding-block: var(--s6); }
+  .footerTop { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; gap: var(--s5); }
 }
 
 /* 언어 고르기 — 꼬리말 안, 한 줄로 흐르고 좁으면 접힌다 */
@@ -131,7 +134,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--s0) var(--s1h);
-  justify-content: center;
 }
 .footerLocales a[aria-current="true"] {
   color: var(--accent);
@@ -145,7 +147,12 @@
   .brandName { font-size: var(--fs-14); }
   .brand { min-width: 0; }
   .nav { flex: none; gap: 0; }
+  .footerInner { width: 90%; max-width: 90vw; padding-left: 0; padding-right: 0; margin-inline: auto; }
 }
+
+.footerBottom { position: relative; margin-top: var(--s6); padding-top: var(--s3); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s2) var(--s4); }
+.footerBottom::before { content: ""; position: absolute; top: 0; left: 50%; width: 100vw; border-top: 1px solid color-mix(in srgb, var(--divider) 70%, transparent); transform: translateX(-50%); }
+.footerCopyright, .footerMotto { color: var(--text-faint); font-size: var(--fs-11); }
 
 /* 현재 사이트(약관)의 navLink 강조 */
 .navLinkActive {

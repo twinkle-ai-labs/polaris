@@ -62,38 +62,33 @@ export default function Chrome({
           className={styles.footerSky}
         />
         <div className={styles.footerInner}>
-          <p className={styles.footerLine}>
-            {site.name}
-            {site.tagline ? ` — ${site.tagline}` : ""}
-          </p>
-          {/*
-            언어 고르기는 꼬리말에 둔다. 이 사이트에서 언어는 «지금 할 일»이 아니라
-            «안 맞으면 바꾸는 것»이라 머리에서 자리를 차지할 이유가 없다.
-          */}
-          <nav className={styles.footerLocales} aria-label={t.pickLanguage}>
-            {LOCALES.map((l) => (
-              <Link
-                key={l.value}
-                href={l.value === site.defaultLocale ? "/" : `/${l.value}/`}
-                hrefLang={l.value}
-                lang={l.value}
-                className={styles.footerLink}
-                aria-current={l.value === locale ? "true" : undefined}
-              >
-                {l.label}
-              </Link>
-            ))}
-          </nav>
-          {/* 이 집의 이름은 Polaris 이고, 그것을 운영하는 이름은 따로 있다.
-              약관이 «운영자»라고 부르는 쪽을 바닥에서 한 번 밝혀 둔다. */}
-          <p className={styles.footerOperator}>
-            {site.operator ? <span className={styles.operatorName}>{site.operator}</span> : null}
-            {site.contactEmail ? (
-              <a href={`mailto:${site.contactEmail}`} className={styles.footerLink}>
-                {site.contactEmail}
-              </a>
-            ) : null}
-          </p>
+          <div className={styles.footerTop}>
+            <div className={styles.footerBrand}>
+              <p className={styles.footerName}><StarMark className={styles.footerStar} />{site.name}</p>
+              {site.tagline ? <p className={styles.footerLine}>{site.tagline}</p> : null}
+            </div>
+            <nav className={styles.footerColumn} aria-label={t.pickLanguage}>
+              <p className={styles.footerHeading}>{t.pickLanguage}</p>
+              <div className={styles.footerLocales}>
+                {LOCALES.map((l) => (
+                  <Link key={l.value} href={l.value === site.defaultLocale ? "/" : `/${l.value}/`} hrefLang={l.value} lang={l.value} className={styles.footerLink} aria-current={l.value === locale ? "true" : undefined}>
+                    {l.label}
+                  </Link>
+                ))}
+              </div>
+            </nav>
+            <div className={styles.footerColumn}>
+              <p className={styles.footerHeading}>{locale === "ko" ? "운영 및 문의" : "Operator & contact"}</p>
+              <p className={styles.footerOperator}>
+                {site.operator ? <span className={styles.operatorName}>{site.operator}</span> : null}
+                {site.contactEmail ? <a href={`mailto:${site.contactEmail}`} className={styles.footerLink}>{site.contactEmail}</a> : null}
+              </p>
+            </div>
+          </div>
+          <div className={styles.footerBottom}>
+            <p className={styles.footerCopyright}>© 2026 {site.operator || site.name}</p>
+            <p className={styles.footerMotto}>{site.name}</p>
+          </div>
         </div>
       </footer>
     </>
