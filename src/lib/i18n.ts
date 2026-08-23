@@ -62,7 +62,7 @@ const ko: Strings = {
   blankTitle: "등록된 앱 약관이 없습니다",
   blankBody: "새로운 앱 및 정책 문서가 추가되면 이곳에 표시됩니다.",
   navHome: "홈",
-  navDesign: "디자인",
+  navDesign: "디자인 시스템",
   navBlog: "블로그",
   navTerms: "약관",
   kinds: {

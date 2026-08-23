@@ -5,6 +5,7 @@ import { LOCALES } from "@/lib/labels";
 import StarMark from "@/components/StarMark";
 import Starfield from "@/components/Starfield";
 import ThemeToggle from "@/components/ThemeToggle";
+import HeaderBar from "@/components/HeaderBar";
 import styles from "@/app/layout.module.css";
 
 /**
@@ -27,13 +28,13 @@ export default function Chrome({
 
   return (
     <>
-      <header className={styles.header}>
+      <HeaderBar>
         <div className={styles.headerInner}>
           <a href="https://twinklelabs.kr/" className={styles.brand}>
             <StarMark gradientId="twinkle-brand" className={styles.star} />
             <span className={styles.brandName}>{site.operator || site.name}</span>
           </a>
-          <nav className={styles.nav}>
+          <nav className={styles.nav} aria-label={locale === "ko" ? "주요 메뉴" : "Main navigation"}>
             <a href="https://twinklelabs.kr/" className={styles.navLink}>
               {t.navHome}
             </a>
@@ -43,13 +44,13 @@ export default function Chrome({
             <a href="https://blog.twinklelabs.kr/" className={styles.navLink}>
               {t.navBlog}
             </a>
-            <Link href={locale === site.defaultLocale ? "/" : `/${locale}/`} className={`${styles.navLink} ${styles.navLinkActive}`}>
+            <Link href={locale === site.defaultLocale ? "/" : `/${locale}/`} className={`${styles.navLink} ${styles.navLinkActive}`} aria-current="page">
               {t.navTerms}
             </Link>
             <ThemeToggle toLight={t.toLight} toDark={t.toDark} />
           </nav>
         </div>
-      </header>
+      </HeaderBar>
       <main className={styles.main}>{children}</main>
       <footer className={styles.footer}>
         {/* 바닥에도 하늘 한 자락 — 첫 화면과 마지막 화면이 같은 말로 끝난다. */}

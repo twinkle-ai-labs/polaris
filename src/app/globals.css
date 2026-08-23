@@ -48,6 +48,8 @@
 
   /* 띠 — 화면 전폭을 가로지르는 바탕. 아래 하늘이 살짝 비쳐야 판이 죽지 않는다. */
   --band: color-mix(in srgb, var(--sunken) 72%, transparent);
+  --glass: light-dark(rgba(255, 255, 255, 0.78), rgba(27, 21, 38, 0.78));
+  --glass-border: light-dark(rgba(112, 64, 217, 0.12), rgba(183, 154, 255, 0.14));
 
   /* 형태 */
   --radius-sm: 0.6875rem;
