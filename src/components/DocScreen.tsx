@@ -3,7 +3,6 @@ import type { AppMeta, DocMeta, VersionDoc } from "@/lib/content.mjs";
 import { formatDate } from "@/lib/labels";
 import { strings } from "@/lib/i18n";
 import HtmlLang from "./HtmlLang";
-import LocalePicker from "./LocalePicker";
 import Markdown from "./Markdown";
 import styles from "./DocScreen.module.css";
 
@@ -11,7 +10,6 @@ export default function DocScreen({
   app,
   doc,
   version,
-  locales,
   locale,
   past,
   upcoming,
@@ -20,13 +18,12 @@ export default function DocScreen({
   app: AppMeta;
   doc: DocMeta;
   version: VersionDoc;
-  locales: string[];
   locale: string;
   past: VersionDoc[];
   upcoming: VersionDoc | null;
   archived?: boolean;
 }) {
-  const base = `/t/${app.slug}/${doc.slug}`;
+  const base = `/${app.slug}/${doc.slug}`;
   // 문서의 언어가 화면의 언어를 정한다.
   const t = strings(locale);
   const kind = t.kinds[doc.kind] ?? t.kinds.custom;
@@ -36,15 +33,12 @@ export default function DocScreen({
       <HtmlLang locale={locale} />
 
       <nav className={styles.crumb}>
-        <Link href={`/t/${app.slug}/`}>{app.name}</Link>
+        <Link href={`/${locale}/${app.slug}/`}>{app.name}</Link>
       </nav>
 
       <header className={styles.head}>
         <p className={styles.kind}>{kind}</p>
-        <div className={styles.headRow}>
-          <h1 className={styles.title}>{version.title || doc.name}</h1>
-          <LocalePicker locales={locales} current={locale} base={base} label={t.pickLanguage} />
-        </div>
+        <h1 className={styles.title}>{version.title || doc.name}</h1>
         <dl className={styles.facts}>
           <div className={styles.fact}>
             <dt>{t.effectiveOn}</dt>
@@ -64,7 +58,7 @@ export default function DocScreen({
       {archived ? (
         <p className={`${styles.notice} ${styles.noticePast}`}>
           {t.archivedNotice}{" "}
-          <Link href={`${base}/${locale}/`}>{t.currentOne(kind)}</Link>
+          <Link href={`/${locale}${base}/`}>{t.currentOne(kind)}</Link>
         </p>
       ) : null}
 
@@ -86,7 +80,7 @@ export default function DocScreen({
           <ul className={styles.historyList}>
             {past.map((v) => (
               <li key={v.version}>
-                <Link href={`${base}/${locale}/v/${v.version}/`} className={styles.historyRow}>
+                <Link href={`/${locale}${base}/v/${v.version}/`} className={styles.historyRow}>
                   <span>{t.editionNo(v.version)}</span>
                   <span className={styles.historyWhen}>
                     {t.effectiveSince(formatDate(v.effectiveAt, locale))}

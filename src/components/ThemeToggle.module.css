@@ -4,15 +4,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 0;
-  border-radius: 999px;
-  background: var(--sunken);
+  border: 1px solid color-mix(in srgb, var(--accent) 10%, transparent);
+  border-radius: var(--radius-pill);
+  background: var(--glass);
   color: var(--text-sub);
   cursor: pointer;
   transition: background var(--motion-fast) var(--ease-entering),
-    color var(--motion-fast) var(--ease-entering);
+    color var(--motion-fast) var(--ease-entering), transform var(--motion-fast) var(--ease-entering), box-shadow var(--motion-fast) var(--ease-entering);
 }
 
-.toggle:hover { background: var(--primary-soft); color: var(--accent); }
+.toggle:hover { background: var(--primary-soft); color: var(--accent); transform: rotate(8deg); box-shadow: var(--shadow-card); }
 
-.icon { font-size: 0.9375rem; line-height: 1; }
+.icon { font-size: var(--fs-16); line-height: 1; }

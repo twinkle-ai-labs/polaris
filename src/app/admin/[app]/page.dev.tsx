@@ -32,9 +32,9 @@ export default async function AdminApp({ params }: { params: Promise<{ app: stri
       <div className={styles.head}>
         <div>
           <h1 className={styles.title}>{meta.name}</h1>
-          <p className={styles.subtitle}>/t/{meta.slug}/</p>
+          <p className={styles.subtitle}>/{meta.defaultLocale}/{meta.slug}/</p>
         </div>
-        <Link href={`/t/${meta.slug}/`} className={styles.ghost}>
+        <Link href={`/${meta.defaultLocale}/${meta.slug}/`} className={styles.ghost}>
           공개 화면 보기
         </Link>
       </div>
@@ -49,7 +49,7 @@ export default async function AdminApp({ params }: { params: Promise<{ app: stri
                 <span className={styles.rowMain}>
                   <span className={styles.rowName}>{doc.name}</span>
                   <span className={styles.rowSub}>
-                    {kindLabel(doc.kind)} · /t/{app}/{doc.slug}/
+                    {kindLabel(doc.kind)} · /{meta.defaultLocale}/{app}/{doc.slug}/
                   </span>
                 </span>
                 <span className={styles.rowSide}>

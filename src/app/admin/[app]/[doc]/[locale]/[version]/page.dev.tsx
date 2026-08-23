@@ -38,7 +38,7 @@ export default async function AdminVersion({
         </div>
         <div className={styles.actions}>
           {found.status === "published" ? (
-            <Link href={`/t/${app}/${doc}/${locale}/v/${found.version}/`} className={styles.ghost}>
+            <Link href={`/${locale}/${app}/${doc}/v/${found.version}/`} className={styles.ghost}>
               공개 화면 보기
             </Link>
           ) : null}

@@ -3,7 +3,6 @@ import {
   currentVersion,
   everyRoute,
   listVersions,
-  publishedLocales,
   readApp,
   readDoc,
   readVersion,
@@ -53,7 +52,6 @@ export default async function VersionPage({
         doc={docMeta}
         version={found}
         locale={locale}
-        locales={publishedLocales(app, doc)}
         past={[]}
         upcoming={null}
         archived={current?.version !== found.version}

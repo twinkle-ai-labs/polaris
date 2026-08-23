@@ -3,7 +3,6 @@ import {
   currentVersion,
   everyRoute,
   pastVersions,
-  publishedLocales,
   readApp,
   readDoc,
   upcomingVersion,
@@ -44,7 +43,6 @@ export default async function DocLocalePage({
         doc={docMeta}
         version={version}
         locale={locale}
-        locales={publishedLocales(app, doc)}
         past={pastVersions(app, doc, locale)}
         upcoming={upcomingVersion(app, doc, locale)}
       />

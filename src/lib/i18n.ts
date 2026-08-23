@@ -9,6 +9,10 @@
 
 export type Strings = {
   archive: string;
+  heroTitle: string;
+  heroDefine: string;
+  footerNav: string;
+  footerContact: string;
   allApps: string;
   effectiveOn: string;
   edition: string;
@@ -40,6 +44,10 @@ export type Strings = {
 
 const ko: Strings = {
   archive: "약관 및 정책 보관소",
+  heroTitle: "변하지 않는 하나의 기준",
+  heroDefine: "모든 약관과 정책을 한곳에",
+  footerNav: "바로가기",
+  footerContact: "운영 및 문의",
   allApps: "전체 앱 목록",
   effectiveOn: "시행일",
   edition: "판",
@@ -76,6 +84,10 @@ const ko: Strings = {
 
 const en: Strings = {
   archive: "Legal & Policy Hub",
+  heroTitle: "One reliable point of reference",
+  heroDefine: "Every term and policy, in one place",
+  footerNav: "Quick links",
+  footerContact: "Operator & contact",
   allApps: "All Apps",
   effectiveOn: "Effective Date",
   edition: "Version",
@@ -112,6 +124,10 @@ const en: Strings = {
 
 const ja: Strings = {
   archive: "規約と方針",
+  heroTitle: "変わらない、ひとつの基準",
+  heroDefine: "すべての規約とポリシーを一か所に",
+  footerNav: "リンク",
+  footerContact: "運営・お問い合わせ",
   allApps: "すべてのアプリ",
   effectiveOn: "施行日",
   edition: "版",
@@ -148,6 +164,10 @@ const ja: Strings = {
 
 const zhCN: Strings = {
   archive: "条款与政策",
+  heroTitle: "始终如一的统一标准",
+  heroDefine: "所有条款与政策，集中于一处",
+  footerNav: "快速链接",
+  footerContact: "运营与联系",
   allApps: "全部应用",
   effectiveOn: "生效日期",
   edition: "版本",
@@ -185,6 +205,10 @@ const zhCN: Strings = {
 const zhTW: Strings = {
   ...zhCN,
   archive: "條款與政策",
+  heroTitle: "始終如一的統一標準",
+  heroDefine: "所有條款與政策，集中於一處",
+  footerNav: "快速連結",
+  footerContact: "營運與聯絡",
   allApps: "全部應用程式",
   effectiveOn: "生效日期",
   edition: "版本",
@@ -220,6 +244,10 @@ const zhTW: Strings = {
 
 const es: Strings = {
   archive: "Documentos legales",
+  heroTitle: "Un único punto de referencia",
+  heroDefine: "Todos los términos y políticas en un solo lugar",
+  footerNav: "Enlaces",
+  footerContact: "Operador y contacto",
   allApps: "Todas las apps",
   effectiveOn: "En vigor desde",
   edition: "Versión",
@@ -256,6 +284,10 @@ const es: Strings = {
 
 const de: Strings = {
   archive: "Rechtliche Dokumente",
+  heroTitle: "Ein verlässlicher Bezugspunkt",
+  heroDefine: "Alle Bedingungen und Richtlinien an einem Ort",
+  footerNav: "Direktlinks",
+  footerContact: "Betreiber & Kontakt",
   allApps: "Alle Apps",
   effectiveOn: "Gültig ab",
   edition: "Fassung",
@@ -292,6 +324,10 @@ const de: Strings = {
 
 const fr: Strings = {
   archive: "Documents juridiques",
+  heroTitle: "Un repère unique et fiable",
+  heroDefine: "Toutes les conditions et politiques au même endroit",
+  footerNav: "Liens rapides",
+  footerContact: "Opérateur et contact",
   allApps: "Toutes les applis",
   effectiveOn: "En vigueur le",
   edition: "Version",
@@ -329,6 +365,10 @@ const fr: Strings = {
 
 const it: Strings = {
   archive: "Termini e informative",
+  heroTitle: "Un unico punto di riferimento",
+  heroDefine: "Tutti i termini e le policy in un unico luogo",
+  footerNav: "Link rapidi",
+  footerContact: "Gestore e contatti",
   allApps: "Tutte le app",
   effectiveOn: "In vigore dal",
   edition: "Versione",
@@ -365,6 +405,10 @@ const it: Strings = {
 
 const ptBR: Strings = {
   archive: "Termos e políticas",
+  heroTitle: "Um único ponto de referência",
+  heroDefine: "Todos os termos e políticas em um só lugar",
+  footerNav: "Links rápidos",
+  footerContact: "Operador e contato",
   allApps: "Todos os aplicativos",
   effectiveOn: "Em vigor desde",
   edition: "Versão",
@@ -401,6 +445,10 @@ const ptBR: Strings = {
 
 const id: Strings = {
   archive: "Ketentuan dan kebijakan",
+  heroTitle: "Satu acuan yang tetap",
+  heroDefine: "Semua ketentuan dan kebijakan di satu tempat",
+  footerNav: "Tautan cepat",
+  footerContact: "Pengelola & kontak",
   allApps: "Semua aplikasi",
   effectiveOn: "Berlaku sejak",
   edition: "Versi",

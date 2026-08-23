@@ -2,8 +2,15 @@
 .hero {
   position: relative;
   isolation: isolate;
+  width: 100vw;
+  margin-top: calc(-1 * var(--s5));
+  margin-left: calc(50% - 50vw);
   margin-bottom: var(--s5);
-  padding-top: var(--s3);
+  padding: clamp(7rem, 12vw, 11rem) max(var(--s3), calc((100vw - var(--shell-narrow)) / 2)) var(--s8);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .intro {
@@ -19,6 +26,8 @@
 .intro > :nth-child(2) { animation-delay: calc(var(--motion-fast) / 2); }
 .intro > :nth-child(3) { animation-delay: var(--motion-fast); }
 .intro > :nth-child(4) { animation-delay: calc(var(--motion-fast) * 1.5); }
+.intro > :nth-child(5) { animation-delay: calc(var(--motion-fast) * 2); }
+.intro > :nth-child(6) { animation-delay: calc(var(--motion-fast) * 2.5); }
 
 @keyframes riseIn {
   from { opacity: 0; transform: translateY(0.75rem); }
@@ -27,9 +36,9 @@
 /* 북극성이 이름 위에 선다 — 이 집의 이름이 별의 이름이라서다. */
 .heroMark {
   display: block;
-  width: 2.75rem;
-  height: 2.75rem;
-  margin: 0 auto var(--s2);
+  width: 3.25rem;
+  height: 3.25rem;
+  margin: 0 auto var(--s2h);
   filter: drop-shadow(0 0 1.25rem color-mix(in srgb, var(--primary) 45%, transparent));
   animation: breathe calc(var(--motion-ambient) * 1.6) var(--ease-entering)
     infinite alternate;
@@ -50,7 +59,7 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: var(--s1h);
+  margin-bottom: var(--s2);
 }
 /* 작은 눈금 하나 — 이름이 시작되는 자리를 손가락처럼 가리킨다. */
 .eyebrow::before {
@@ -63,17 +72,89 @@
 }
 
 .title {
-  font-size: var(--fs-36);
+  font-size: var(--fs-40);
   font-weight: var(--fw-bold);
   letter-spacing: -0.04em;
-  line-height: 1.16;
+  line-height: 1.08;
+  text-wrap: balance;
 }
 
 .lead {
-  margin-top: var(--s2);
+  margin-top: var(--s1);
   color: var(--text-sub);
   font-size: var(--fs-16);
-  line-height: 1.8;
+  line-height: var(--lh-body);
+}
+
+.define {
+  margin-top: var(--s2);
+  color: var(--text);
+  font-size: var(--fs-20);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tr-slight);
+  line-height: var(--lh-body);
+}
+
+.actions {
+  margin-top: var(--s4);
+  display: flex;
+  justify-content: center;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 10rem;
+  padding: var(--s1h) var(--s4);
+  border-radius: var(--radius-pill);
+  background: var(--brand-gradient);
+  color: var(--primary-ink);
+  box-shadow: var(--shadow-brand);
+  font-size: var(--fs-16);
+  font-weight: var(--fw-semibold);
+  transition: transform var(--motion-fast) var(--ease-entering), box-shadow var(--motion-fast) var(--ease-entering);
+}
+
+.cta:hover {
+  text-decoration: none;
+  transform: translateY(-0.125rem);
+  box-shadow: var(--shadow-floating);
+}
+
+.appsSection {
+  padding-bottom: var(--s4);
+  scroll-margin-top: 6rem;
+}
+
+.sectionHead { margin-bottom: var(--s4); }
+
+.sectionKicker {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s1);
+  margin-bottom: var(--s1h);
+  color: var(--accent);
+  font-size: var(--fs-12);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tr-wide);
+  text-transform: uppercase;
+}
+
+.sectionKicker::before {
+  content: "";
+  width: 1.5rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+.sectionTitle {
+  color: var(--text);
+  font-size: var(--fs-32);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tr-tight);
+  line-height: var(--lh-title);
 }
 
 .grid {
@@ -150,23 +231,6 @@
 
 .count { font-size: var(--fs-12); color: var(--text-faint); font-weight: var(--fw-semibold); }
 
-.chip {
-  font-size: var(--fs-11);
-  font-weight: var(--fw-semibold);
-  color: var(--text-sub);
-  background: var(--sunken);
-  border-radius: var(--radius-pill);
-  padding: 0.1875rem 0.5625rem;
-}
-
-/* 접힌 나머지 — 칩이되 테두리도 바탕도 없다. 세는 말이지 고르는 말이 아니다. */
-.chipMore {
-  font-size: var(--fs-11);
-  font-weight: var(--fw-semibold);
-  color: var(--text-faint);
-  padding: 0.1875rem 0.25rem;
-}
-
 /* 카드의 오른쪽 위에서 조용히 기다리는 화살표 — 눌러도 된다는 속삭임. */
 .arrow {
   position: absolute;
@@ -197,11 +261,11 @@
 
 @media (min-width: 40em) {
   .grid { grid-template-columns: repeat(2, 1fr); gap: var(--s3); }
-  .title { font-size: var(--fs-48); }
-  .heroMark { width: 3.25rem; height: 3.25rem; }
-  .hero { margin-bottom: var(--s6); }
+  .title { font-size: var(--fs-60); }
+  .heroMark { width: 4rem; height: 4rem; }
 }
 
 @media (min-width: 64em) {
-  .grid { grid-template-columns: repeat(3, 1fr); }
+  .title { font-size: var(--fs-72); }
 }
+@media (min-width: 64em) { .grid { grid-template-columns: repeat(3, 1fr); } }

@@ -111,6 +111,7 @@
 .footerHeading { color: var(--text-faint); font-size: var(--fs-11); font-weight: var(--fw-bold); letter-spacing: var(--tr-wide); text-transform: uppercase; }
 .footerLink { color: var(--text-sub); font-weight: var(--fw-semibold); }
 .footerLink:hover { color: var(--accent); text-decoration: none; }
+.footerLinks { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1) var(--s2h); font-size: var(--fs-12); }
 
 /* 운영자 이름과 메일은 한 덩이로 선다 — 둘 다 «누가 여는 집인가»를 말한다. */
 .footerOperator {
@@ -127,17 +128,6 @@
   .headerInner, .main, .footerInner { padding-left: var(--s3); padding-right: var(--s3); }
   .main { padding-top: var(--s6); }
   .footerTop { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; gap: var(--s5); }
-}
-
-/* 언어 고르기 — 꼬리말 안, 한 줄로 흐르고 좁으면 접힌다 */
-.footerLocales {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s0) var(--s1h);
-}
-.footerLocales a[aria-current="true"] {
-  color: var(--accent);
-  font-weight: var(--fw-semibold);
 }
 
 @media (max-width: 39.99em) {
@@ -157,5 +147,7 @@
 /* 현재 사이트(약관)의 navLink 강조 */
 .navLinkActive {
   color: var(--accent);
-  font-weight: var(--fw-bold);
+  font-weight: var(--fw-semibold);
+  background: transparent;
+  box-shadow: none;
 }

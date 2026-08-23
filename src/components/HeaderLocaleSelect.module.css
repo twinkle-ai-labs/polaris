@@ -1,0 +1,113 @@
+.wrap { position: relative; flex: 0 0 auto; }
+
+.trigger {
+  height: 2.25rem;
+  min-width: 8.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s1);
+  padding: 0 var(--s1h);
+  border: 1px solid color-mix(in srgb, var(--accent) 12%, transparent);
+  border-radius: var(--radius-pill);
+  background: var(--glass);
+  color: var(--text-sub);
+  font-size: var(--fs-12);
+  font-weight: var(--fw-semibold);
+  cursor: pointer;
+  transition: border-color var(--motion-fast) var(--ease-entering), background var(--motion-fast) var(--ease-entering), color var(--motion-fast) var(--ease-entering), box-shadow var(--motion-fast) var(--ease-entering);
+}
+
+.trigger:hover,
+.trigger[aria-expanded="true"] {
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+  background: color-mix(in srgb, var(--glass) 82%, var(--primary-soft));
+  color: var(--text);
+  box-shadow: var(--shadow-card);
+}
+.trigger:active { transform: scale(0.97); }
+
+.flag {
+  width: 1.25rem;
+  height: 0.875rem;
+  flex: 0 0 auto;
+  object-fit: cover;
+  border-radius: 0.1875rem;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--text) 10%, transparent);
+}
+
+.current { flex: 1; text-align: left; white-space: nowrap; }
+.chevron { flex: none; color: var(--text-faint); transition: transform var(--motion-fast) var(--ease-entering); }
+.chevronOpen { transform: rotate(180deg); }
+
+.menu {
+  position: absolute;
+  top: calc(100% + var(--s1));
+  right: 0;
+  z-index: 40;
+  width: 13rem;
+  margin: 0;
+  padding: var(--s1) var(--s0) var(--s1) var(--s1);
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  -webkit-backdrop-filter: blur(1.5rem) saturate(150%);
+  backdrop-filter: blur(1.5rem) saturate(150%);
+  box-shadow: var(--shadow-lift);
+  transform-origin: top right;
+  animation: openMenu 220ms cubic-bezier(.2, 1.35, .4, 1) both;
+}
+
+.menuScroll {
+  max-height: min(25rem, calc(100vh - 7rem));
+  padding-right: calc(var(--s1) - 1px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--accent) 42%, transparent) transparent;
+}
+
+.menuScroll::-webkit-scrollbar { width: 1px; }
+.menuScroll::-webkit-scrollbar-track { margin-block: var(--s1); background: transparent; }
+.menuScroll::-webkit-scrollbar-thumb {
+  border-radius: var(--radius-pill);
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--accent) 30%, transparent), color-mix(in srgb, var(--primary-lit) 62%, transparent));
+}
+.menuScroll::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+@keyframes openMenu {
+  from { opacity: 0; transform: translateY(-0.5rem) scale(0.96); }
+  70% { transform: translateY(0.0625rem) scale(1.005); }
+  to { opacity: 1; transform: none; }
+}
+
+.option {
+  width: 100%;
+  min-height: 2.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--s1);
+  padding: var(--s1) var(--s1h);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-sub);
+  font-size: var(--fs-12);
+  font-weight: var(--fw-medium);
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--motion-fast) var(--ease-entering), color var(--motion-fast) var(--ease-entering), transform var(--motion-fast) var(--ease-entering);
+}
+
+.option:hover { background: var(--sunken); color: var(--text); transform: translateX(0.125rem); }
+.option:active { transform: translateX(0.125rem) scale(0.985); }
+.optionActive { background: var(--primary-soft); color: var(--accent); font-weight: var(--fw-semibold); }
+.check { color: var(--accent); font-size: var(--fs-12); }
+
+@media (max-width: 39.99em) {
+  .trigger { min-width: 2.75rem; width: 2.75rem; padding: 0; justify-content: center; }
+  .current, .chevron { display: none; }
+  .menu { position: fixed; top: 4.5rem; left: 5vw; right: 5vw; width: 90vw; }
+  .menuScroll { max-height: calc(100dvh - 7rem); }
+}

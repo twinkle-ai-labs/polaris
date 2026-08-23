@@ -98,6 +98,10 @@
   color-scheme: light dark;
 }
 
+/* 직접 고른 테마에서는 light-dark()까지 같은 쪽을 보게 한다. */
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }
+
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: var(--aurora-dusk-0);

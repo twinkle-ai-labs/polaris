@@ -37,7 +37,7 @@ export default async function AdminHome({
               <Link href={`/admin/${app.slug}/`} className={styles.row}>
                 <span className={styles.rowMain}>
                   <span className={styles.rowName}>{app.name}</span>
-                  <span className={styles.rowSub}>/t/{app.slug}/</span>
+                  <span className={styles.rowSub}>/{app.defaultLocale}/{app.slug}/</span>
                 </span>
                 <span className={styles.rowSide}>
                   <span className={styles.chip}>문서 {app.docs.length}</span>
@@ -70,7 +70,7 @@ export default async function AdminHome({
                 pattern="[a-z0-9-]+"
                 required
               />
-              <span className={styles.hint}>/t/여기/… 에 쓰입니다. 영소문자·숫자·하이픈.</span>
+              <span className={styles.hint}>/언어/여기/… 에 쓰입니다. 영소문자·숫자·하이픈.</span>
             </label>
           </div>
           <label className={styles.field}>

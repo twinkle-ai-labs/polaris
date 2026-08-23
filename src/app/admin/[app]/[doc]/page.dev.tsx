@@ -32,10 +32,10 @@ export default async function AdminDoc({
         <div>
           <h1 className={styles.title}>{docMeta.name}</h1>
           <p className={styles.subtitle}>
-            {kindLabel(docMeta.kind)} · /t/{app}/{doc}/
+            {kindLabel(docMeta.kind)} · /{appMeta.defaultLocale}/{app}/{doc}/
           </p>
         </div>
-        <Link href={`/t/${app}/${doc}/`} className={styles.ghost}>
+        <Link href={`/${appMeta.defaultLocale}/${app}/${doc}/`} className={styles.ghost}>
           공개 화면 보기
         </Link>
       </div>

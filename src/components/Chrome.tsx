@@ -6,6 +6,7 @@ import StarMark from "@/components/StarMark";
 import Starfield from "@/components/Starfield";
 import ThemeToggle from "@/components/ThemeToggle";
 import HeaderBar from "@/components/HeaderBar";
+import HeaderLocaleSelect from "@/components/HeaderLocaleSelect";
 import styles from "@/app/layout.module.css";
 
 /**
@@ -47,6 +48,7 @@ export default function Chrome({
             <Link href={locale === site.defaultLocale ? "/" : `/${locale}/`} className={`${styles.navLink} ${styles.navLinkActive}`} aria-current="page">
               {t.navTerms}
             </Link>
+            <HeaderLocaleSelect locales={LOCALES} current={locale} defaultLocale={site.defaultLocale} label={t.pickLanguage} />
             <ThemeToggle toLight={t.toLight} toDark={t.toDark} />
           </nav>
         </div>
@@ -67,18 +69,17 @@ export default function Chrome({
               <p className={styles.footerName}><StarMark className={styles.footerStar} />{site.name}</p>
               {site.tagline ? <p className={styles.footerLine}>{site.tagline}</p> : null}
             </div>
-            <nav className={styles.footerColumn} aria-label={t.pickLanguage}>
-              <p className={styles.footerHeading}>{t.pickLanguage}</p>
-              <div className={styles.footerLocales}>
-                {LOCALES.map((l) => (
-                  <Link key={l.value} href={l.value === site.defaultLocale ? "/" : `/${l.value}/`} hrefLang={l.value} lang={l.value} className={styles.footerLink} aria-current={l.value === locale ? "true" : undefined}>
-                    {l.label}
-                  </Link>
-                ))}
+            <nav className={styles.footerColumn} aria-label={t.footerNav}>
+              <p className={styles.footerHeading}>{t.footerNav}</p>
+              <div className={styles.footerLinks}>
+                <a href="https://twinklelabs.kr/" className={styles.footerLink}>{t.navHome}</a>
+                <a href="https://design.twinklelabs.kr/" className={styles.footerLink}>{t.navDesign}</a>
+                <a href="https://blog.twinklelabs.kr/" className={styles.footerLink}>{t.navBlog}</a>
+                <Link href={locale === site.defaultLocale ? "/" : `/${locale}/`} className={styles.footerLink}>{t.navTerms}</Link>
               </div>
             </nav>
             <div className={styles.footerColumn}>
-              <p className={styles.footerHeading}>{locale === "ko" ? "운영 및 문의" : "Operator & contact"}</p>
+              <p className={styles.footerHeading}>{t.footerContact}</p>
               <p className={styles.footerOperator}>
                 {site.operator ? <span className={styles.operatorName}>{site.operator}</span> : null}
                 {site.contactEmail ? <a href={`mailto:${site.contactEmail}`} className={styles.footerLink}>{site.contactEmail}</a> : null}
