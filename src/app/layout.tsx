@@ -12,8 +12,8 @@ export const metadata: Metadata = {
   description: site.tagline || "여러 앱의 약관을 한 곳에서 기르고 뿌린다.",
 };
 
-// 화면이 그려지기 전에 테마를 정한다 — 늦으면 흰 화면이 한 번 번쩍인다.
-const themeBoot = `(function(){try{var t=localStorage.getItem("polaris-theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();`;
+// 화면이 그려지기 전에 테마를 정한다 — 쿠키를 먼저 읽어 서브도메인 간 동기화하고, 없으면 localStorage를 본다.
+const themeBoot = `(function(){try{var m=document.cookie.match(/(?:^|; )twinkle-theme=([^;]*)/);var t=m?decodeURIComponent(m[1]):localStorage.getItem("twinkle-theme")||localStorage.getItem("polaris-theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();`;
 
 /*
  * 루트 레이아웃은 **그릇만** 든다.
