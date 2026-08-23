@@ -167,3 +167,9 @@
   /* 좁은 화면에서는 머리띠가 이름과 테마만 갖는다 — 나머지는 바닥에도 있다. */
   .nav .navLink:not(:last-of-type) { display: none; }
 }
+
+/* 현재 사이트(약관)의 navLink 강조 */
+.navLinkActive {
+  color: var(--accent);
+  font-weight: var(--fw-bold);
+}

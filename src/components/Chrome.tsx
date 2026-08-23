@@ -34,16 +34,16 @@ export default function Chrome({
             <span className={styles.brandName}>{site.operator || site.name}</span>
           </a>
           <nav className={styles.nav}>
-            <a href="https://twinklelabs.kr/#apps" className={styles.navLink}>
-              {t.navApps}
+            <a href="https://twinklelabs.kr/" className={styles.navLink}>
+              {t.navHome}
             </a>
-            <a href="https://twinklelabs.kr/design/" className={styles.navLink}>
+            <a href="https://design.twinklelabs.kr/" className={styles.navLink}>
               {t.navDesign}
             </a>
-            <a href="https://twinklelabs.kr/#contact" className={styles.navLink}>
-              {t.navContact}
+            <a href="https://blog.twinklelabs.kr/" className={styles.navLink}>
+              {t.navBlog}
             </a>
-            <Link href={locale === site.defaultLocale ? "/" : `/${locale}/`} className={styles.navLink}>
+            <Link href={locale === site.defaultLocale ? "/" : `/${locale}/`} className={`${styles.navLink} ${styles.navLinkActive}`}>
               {t.navTerms}
             </Link>
             <ThemeToggle toLight={t.toLight} toDark={t.toDark} />
