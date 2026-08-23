@@ -29,11 +29,25 @@ export default function Chrome({
     <>
       <header className={styles.header}>
         <div className={styles.headerInner}>
-          <Link href={locale === site.defaultLocale ? "/" : `/${locale}/`} className={styles.brand}>
+          <a href="https://twinklelabs.kr/" className={styles.brand}>
             <StarMark gradientId="twinkle-brand" className={styles.star} />
-            <span className={styles.brandName}>{site.name}</span>
-          </Link>
-          <ThemeToggle toLight={t.toLight} toDark={t.toDark} />
+            <span className={styles.brandName}>{site.operator || site.name}</span>
+          </a>
+          <nav className={styles.nav}>
+            <a href="https://twinklelabs.kr/#apps" className={styles.navLink}>
+              {t.navApps}
+            </a>
+            <a href="https://twinklelabs.kr/design/" className={styles.navLink}>
+              {t.navDesign}
+            </a>
+            <a href="https://twinklelabs.kr/#contact" className={styles.navLink}>
+              {t.navContact}
+            </a>
+            <Link href={locale === site.defaultLocale ? "/" : `/${locale}/`} className={styles.navLink}>
+              {t.navTerms}
+            </Link>
+            <ThemeToggle toLight={t.toLight} toDark={t.toDark} />
+          </nav>
         </div>
       </header>
       <main className={styles.main}>{children}</main>

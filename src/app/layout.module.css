@@ -81,6 +81,19 @@
 
 .brandName { font-size: var(--fs-16); }
 
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+}
+
+.navLink {
+  color: var(--text-sub);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-semibold);
+  transition: color var(--motion-fast) var(--ease);
+}
+.navLink:hover { color: var(--text); text-decoration: none; }
 .main {
   flex: 1;
   width: 100%;
@@ -148,4 +161,9 @@
 .footerLocales a[aria-current="true"] {
   color: var(--accent);
   font-weight: var(--fw-semibold);
+}
+
+@media (max-width: 29.99em) {
+  /* 좁은 화면에서는 머리띠가 이름과 테마만 갖는다 — 나머지는 바닥에도 있다. */
+  .nav .navLink:not(:last-of-type) { display: none; }
 }
