@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Analytics from "@/components/Analytics";
 import Aurora from "@/components/Aurora";
 import RouteViews from "@/components/RouteViews";
+import Providers from "@/components/Providers";
 import { readSite } from "@/lib/content.mjs";
 import "./globals.css";
 
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 // 화면이 그려지기 전에 테마를 정한다 — 쿠키를 먼저 읽어 서브도메인 간 동기화하고, 없으면 localStorage를 본다.
-const themeBoot = `(function(){try{var m=document.cookie.match(/(?:^|; )twinkle-theme=([^;]*)/);var t=m?decodeURIComponent(m[1]):localStorage.getItem("twinkle-theme")||localStorage.getItem("polaris-theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();`;
+const themeBoot = `(function(){try{var m=document.cookie.match(/(?:^|; )twinkle-theme=([^;]*)/);var t=m?decodeURIComponent(m[1]):null;if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();`;
 
 /*
  * 루트 레이아웃은 **그릇만** 든다.
@@ -34,10 +35,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Analytics />
       </head>
       <body>
+        <Providers>
         <RouteViews />
         {/* 하늘은 어느 언어의 화면에나 걸린다 — 껍데기의 말과 달리 언어를 타지 않는다. */}
         <Aurora />
         {children}
+        </Providers>
       </body>
     </html>
   );
