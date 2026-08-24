@@ -80,6 +80,7 @@ export default async function AdminHome({
           <div className={styles.field}>
             <span className={styles.label}>기본 언어</span>
             <Choice
+              id="newApp.defaultLocale"
               name="defaultLocale"
               defaultValue="ko"
               options={LOCALES.map((l) => ({ value: l.value, label: l.label }))}
@@ -129,6 +130,7 @@ export default async function AdminHome({
             <div className={styles.field}>
               <span className={styles.label}>화면 기본 언어</span>
               <Choice
+                id="site.defaultLocale"
                 name="defaultLocale"
                 defaultValue={site.defaultLocale}
                 options={LOCALES.map((l) => ({ value: l.value, label: l.label }))}

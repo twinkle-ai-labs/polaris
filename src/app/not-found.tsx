@@ -3,6 +3,9 @@ import { readSite } from "@/lib/content.mjs";
 import { strings } from "@/lib/i18n";
 import styles from "./not-found.module.css";
 
+/* 없는 곳은 목록에 올리지 않는다 — 404 가 검색 결과에 서면 찾아온 사람이 처음부터 빈손이다. */
+export const metadata = { robots: { index: false, follow: true } };
+
 export default function NotFound() {
   const t = strings(readSite().defaultLocale);
   return (

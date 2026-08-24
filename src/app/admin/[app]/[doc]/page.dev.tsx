@@ -106,6 +106,7 @@ export default async function AdminDoc({
               <div className={styles.field}>
                 <span className={styles.label}>새 언어</span>
                 <Choice
+                  id="newLocale.locale"
                   name="locale"
                   defaultValue={unused[0].value}
                   options={unused.map((l) => ({ value: l.value, label: l.label }))}
@@ -153,6 +154,7 @@ export default async function AdminDoc({
             <div className={styles.field}>
               <span className={styles.label}>종류</span>
               <Choice
+                id="doc.kind"
                 name="kind"
                 defaultValue={docMeta.kind}
                 options={DOC_KINDS.map((k) => ({ value: k.value, label: k.label }))}
@@ -174,6 +176,7 @@ export default async function AdminDoc({
               저장
             </button>
             <DangerAction
+              id="doc.remove"
               action={removeDoc}
               fields={{ app, slug: docMeta.slug }}
               label="문서 지우기"

@@ -1,20 +1,39 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import type { VersionDoc } from "@/lib/content.mjs";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import {
+  bodyEdited,
+  editorOpened,
+  paneSwitched,
+  selectEditorBody,
+  selectEditorPane,
+} from "@/store/versionEditorSlice";
 import Choice from "./Choice";
 import md from "../Markdown.module.css";
 import styles from "./VersionEditor.module.css";
 
-type Version = {
-  title: string;
-  status: "draft" | "published";
-  effectiveAt: string;
-  summary: string;
-  body: string;
-};
+/** 편집기가 다루는 것 — 파일의 머리말 넷과 본문. */
+export type EditableVersion = Pick<
+  VersionDoc,
+  "title" | "status" | "effectiveAt" | "summary" | "body"
+>;
 
+const STATUS_OPTIONS = [
+  { value: "draft", label: "초안 — 아무도 못 봅니다" },
+  { value: "published", label: "펴냄 — 시행일부터 보입니다" },
+] as const;
+
+/**
+ * 판본 하나를 고치는 자리.
+ *
+ * 「지금 손으로 고치는 중인 글」만 가게가 든다 — 나머지 칸은 폼이 제 기본값으로 들고,
+ * 저장은 서버 액션이 한 번에 받아 파일에 담는다. 본문만 상태인 이유는
+ * **미리보기가 같은 글을 함께 봐야** 하기 때문이다.
+ */
 export default function VersionEditor({
   app,
   doc,
@@ -22,18 +41,25 @@ export default function VersionEditor({
   version,
   value,
   action,
-  saved,
+  isSaved,
 }: {
   app: string;
   doc: string;
   locale: string;
   version: number;
-  value: Version;
+  value: EditableVersion;
   action: (formData: FormData) => void | Promise<void>;
-  saved: boolean;
+  isSaved: boolean;
 }) {
-  const [body, setBody] = useState(value.body);
-  const [pane, setPane] = useState<"write" | "read">("write");
+  const dispatch = useAppDispatch();
+  const pane = useAppSelector(selectEditorPane);
+  /* 아직 싣기 전에는 파일에서 읽어 온 글을 그대로 그린다 — 첫 그림이 비지 않게. */
+  const body = useAppSelector(selectEditorBody) ?? value.body;
+
+  /* 다른 판본으로 옮겨 가면 그 글로 새로 연다 — 앞 판본의 글이 남아 있으면 그대로 저장된다. */
+  useEffect(() => {
+    dispatch(editorOpened(value.body));
+  }, [dispatch, value.body, app, doc, locale, version]);
 
   return (
     <form action={action} className={styles.form}>
@@ -57,18 +83,16 @@ export default function VersionEditor({
         <div className={styles.field}>
           <span className={styles.label}>상태</span>
           <Choice
+            id="version.status"
             name="status"
             defaultValue={value.status}
-            options={[
-              { value: "draft", label: "초안 — 아무도 못 봅니다" },
-              { value: "published", label: "펴냄 — 시행일부터 보입니다" },
-            ]}
+            options={STATUS_OPTIONS}
           />
         </div>
 
         <label className={styles.field}>
           <span className={styles.label}>시행일</span>
-          {/* 네이티브 달력은 OS가 그린다 — 우리 화면 안에 두려고 글자로 받는다. */}
+          {/* 네이티브 달력은 OS 가 그린다 — 우리 화면 안에 두려고 글자로 받는다. */}
           <input
             className={`${styles.input} ${styles.mono}`}
             name="effectiveAt"
@@ -96,14 +120,14 @@ export default function VersionEditor({
           <button
             type="button"
             className={`${styles.segItem} ${pane === "write" ? styles.segOn : ""}`}
-            onClick={() => setPane("write")}
+            onClick={() => dispatch(paneSwitched("write"))}
           >
             쓰기
           </button>
           <button
             type="button"
             className={`${styles.segItem} ${pane === "read" ? styles.segOn : ""}`}
-            onClick={() => setPane("read")}
+            onClick={() => dispatch(paneSwitched("read"))}
           >
             미리보기
           </button>
@@ -116,9 +140,10 @@ export default function VersionEditor({
           className={styles.textarea}
           name="body"
           value={body}
-          onChange={(e) => setBody(e.target.value)}
+          onChange={(event) => dispatch(bodyEdited(event.target.value))}
           spellCheck={false}
         />
+        {/* 미리보기는 **공개 화면과 같은 옷**을 입는다 — 다른 옷이면 미리 본 것이 아니다. */}
         <div className={styles.preview}>
           <div className={md.prose}>
             <ReactMarkdown remarkPlugins={[remarkGfm]}>{body}</ReactMarkdown>
@@ -130,7 +155,7 @@ export default function VersionEditor({
         <button type="submit" className={styles.save}>
           저장
         </button>
-        {saved ? <span className={styles.saved}>파일에 담았습니다</span> : null}
+        {isSaved ? <span className={styles.saved}>파일에 담았습니다</span> : null}
       </div>
     </form>
   );

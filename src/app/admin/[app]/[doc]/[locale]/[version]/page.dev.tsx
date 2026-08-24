@@ -43,6 +43,7 @@ export default async function AdminVersion({
             </Link>
           ) : null}
           <DangerAction
+            id="version.remove"
             action={removeVersion}
             fields={{ app, doc, locale, version: String(found.version) }}
             label="판본 지우기"
@@ -57,15 +58,9 @@ export default async function AdminVersion({
         doc={doc}
         locale={locale}
         version={found.version}
-        value={{
-          title: found.title,
-          status: found.status,
-          effectiveAt: found.effectiveAt,
-          summary: found.summary,
-          body: found.body,
-        }}
+        value={found}
         action={saveVersion}
-        saved={saved === "1"}
+        isSaved={saved === "1"}
       />
     </>
   );

@@ -35,6 +35,8 @@ export type Strings = {
   homeLead: string;
   blankTitle: string;
   blankBody: string;
+  /** 머리띠의 이름표 — 눈에는 안 보이고 화면 낭독기가 읽는다. */
+  mainNav: string;
   navHome: string;
   navDesign: string;
   navBlog: string;
@@ -69,6 +71,7 @@ const ko: Strings = {
   homeLead: "Twinkle AI Labs가 제공하는 모든 앱의 이용약관 및 개인정보 처리방침을 한 곳에서 투명하고 안전하게 제공합니다.",
   blankTitle: "등록된 앱 약관이 없습니다",
   blankBody: "새로운 앱 및 정책 문서가 추가되면 이곳에 표시됩니다.",
+  mainNav: "주요 메뉴",
   navHome: "홈",
   navDesign: "디자인 시스템",
   navBlog: "블로그",
@@ -109,6 +112,7 @@ const en: Strings = {
   homeLead: "Centralized terms of service and privacy policies for all Twinkle AI Labs applications.",
   blankTitle: "No Apps Registered Yet",
   blankBody: "Newly added apps and policy documents will appear here.",
+  mainNav: "Main navigation",
   navHome: "Home",
   navDesign: "Design",
   navBlog: "Blog",
@@ -149,6 +153,7 @@ const ja: Strings = {
   homeLead: "いくつものアプリの規約を一か所に置き、どのアプリからも同じアドレスで開きます。",
   blankTitle: "まだ登録されたアプリがありません",
   blankBody: "エディタを開いて最初のアプリを登録してください。",
+  mainNav: "メインナビゲーション",
   navHome: "ホーム",
   navDesign: "デザイン",
   navBlog: "ブログ",
@@ -189,6 +194,7 @@ const zhCN: Strings = {
   homeLead: "把多个应用的条款放在一处，从任何应用都用同一个地址打开。",
   blankTitle: "尚未登记任何应用",
   blankBody: "打开编辑器，登记第一个应用。",
+  mainNav: "主导航",
   navHome: "主页",
   navDesign: "设计",
   navBlog: "博客",
@@ -229,6 +235,7 @@ const zhTW: Strings = {
   homeLead: "把多個應用程式的條款放在一處，從任何應用程式都用同一個位址開啟。",
   blankTitle: "尚未登錄任何應用程式",
   blankBody: "開啟編輯器，登錄第一個應用程式。",
+  mainNav: "主導覽",
   navHome: "首頁",
   navDesign: "設計",
   navBlog: "部落格",
@@ -269,6 +276,7 @@ const es: Strings = {
   homeLead: "Los términos de todas las apps en un solo lugar, abiertos desde la misma dirección.",
   blankTitle: "Todavía no hay apps",
   blankBody: "Abre el editor y registra la primera app.",
+  mainNav: "Navegación principal",
   navHome: "Home",
   navDesign: "Diseño",
   navBlog: "Blog",
@@ -309,6 +317,7 @@ const de: Strings = {
   homeLead: "Die Bedingungen aller Apps an einem Ort, über dieselbe Adresse erreichbar.",
   blankTitle: "Noch keine Apps",
   blankBody: "Öffne den Editor und lege die erste App an.",
+  mainNav: "Hauptnavigation",
   navHome: "Home",
   navDesign: "Design",
   navBlog: "Blog",
@@ -349,6 +358,7 @@ const fr: Strings = {
   homeLead: "Les conditions de toutes les applications au même endroit, à la même adresse.",
   blankTitle: "Aucune application pour l’instant",
   blankBody: "Ouvrez l’éditeur et ajoutez la première application.",
+  mainNav: "Navigation principale",
   navHome: "Accueil",
   navDesign: "Design",
   navBlog: "Blog",
@@ -390,6 +400,7 @@ const it: Strings = {
   homeLead: "I termini di tutte le app in un unico posto, allo stesso indirizzo.",
   blankTitle: "Nessuna app per ora",
   blankBody: "Apri l’editor e aggiungi la prima app.",
+  mainNav: "Navigazione principale",
   navHome: "Home",
   navDesign: "Design",
   navBlog: "Blog",
@@ -430,6 +441,7 @@ const ptBR: Strings = {
   homeLead: "Os termos de todos os aplicativos em um só lugar, no mesmo endereço.",
   blankTitle: "Nenhum aplicativo ainda",
   blankBody: "Abra o editor e cadastre o primeiro aplicativo.",
+  mainNav: "Navegação principal",
   navHome: "Home",
   navDesign: "Design",
   navBlog: "Blog",
@@ -470,6 +482,7 @@ const id: Strings = {
   homeLead: "Ketentuan semua aplikasi di satu tempat, dibuka dari alamat yang sama.",
   blankTitle: "Belum ada aplikasi",
   blankBody: "Buka editor dan daftarkan aplikasi pertama.",
+  mainNav: "Navigasi utama",
   navHome: "Beranda",
   navDesign: "Desain",
   navBlog: "Blog",

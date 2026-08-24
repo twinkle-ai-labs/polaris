@@ -4,16 +4,14 @@ import { listApps, listDocs, readSite } from "@/lib/content.mjs";
 import StarMark from "@/components/StarMark";
 import Starfield from "@/components/Starfield";
 import { strings } from "@/lib/i18n";
+import { appPath } from "@/lib/site";
 import styles from "@/app/home.module.css";
 
 /** 홈의 몸통 — `/` 와 `/<언어>/` 가 같은 것을 다른 언어로 그린다. */
 export default function HomeBody({ locale }: { locale: string }) {
   const site = readSite(locale);
   const t = strings(locale);
-  const apps = listApps(locale).map((app) => {
-    const docs = listDocs(app.slug);
-    return { ...app, docs };
-  });
+  const apps = listApps(locale).map((app) => ({ ...app, docCount: listDocs(app.slug).length }));
 
   return (
     <>
@@ -33,9 +31,12 @@ export default function HomeBody({ locale }: { locale: string }) {
           <p className={styles.eyebrow}>{site.name}</p>
           <h1 className={styles.title}>{t.heroTitle}</h1>
           <p className={styles.define}>{t.heroDefine}</p>
+          {/* 운영자가 제 말로 적어 둔 한 줄이 있으면 그것이 먼저다. */}
           <p className={styles.lead}>{site.tagline || t.homeLead}</p>
           <div className={styles.actions}>
-            <a className={styles.cta} href="#apps">{t.allApps}</a>
+            <a className={styles.cta} href="#apps">
+              {t.allApps}
+            </a>
           </div>
         </div>
       </div>
@@ -54,27 +55,25 @@ export default function HomeBody({ locale }: { locale: string }) {
           <ul className={styles.grid}>
             {apps.map((app) => (
               <li key={app.slug}>
-                <Link href={`/${locale}/${app.slug}/`} className={styles.card}>
-                {/* 앱은 제 얼굴로 선다 — 아이콘이 없을 때에만 첫 글자가 대신한다. */}
-                {app.icon ? (
-                  <Image
-                    className={styles.icon}
-                    src={app.icon}
-                    alt=""
-                    width={96}
-                    height={96}
-                  />
-                ) : (
-                  <span className={styles.monogram} aria-hidden="true">
-                    {app.name.trim().charAt(0)}
+                <Link href={appPath(locale, app.slug)} className={styles.card}>
+                  {/* 앱은 제 얼굴로 선다 — 아이콘이 없을 때에만 첫 글자가 대신한다. */}
+                  {app.icon ? (
+                    <Image className={styles.icon} src={app.icon} alt="" width={96} height={96} />
+                  ) : (
+                    <span className={styles.monogram} aria-hidden="true">
+                      {app.name.trim().charAt(0)}
+                    </span>
+                  )}
+                  <span className={styles.arrow} aria-hidden="true">
+                    ↗
                   </span>
-                )}
-                <span className={styles.arrow} aria-hidden="true">↗</span>
-                <span className={styles.cardName}>{app.name}</span>
-                {app.description ? <span className={styles.cardDesc}>{app.description}</span> : null}
-                <span className={styles.cardMeta}>
-                  <span className={styles.count}>{t.docCount(app.docs.length)}</span>
-                </span>
+                  <span className={styles.cardName}>{app.name}</span>
+                  {app.description ? (
+                    <span className={styles.cardDesc}>{app.description}</span>
+                  ) : null}
+                  <span className={styles.cardMeta}>
+                    <span className={styles.count}>{t.docCount(app.docCount)}</span>
+                  </span>
                 </Link>
               </li>
             ))}

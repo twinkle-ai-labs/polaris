@@ -97,6 +97,7 @@ export default async function AdminApp({ params }: { params: Promise<{ app: stri
             <div className={styles.field}>
               <span className={styles.label}>종류</span>
               <Choice
+                id="newDoc.kind"
                 name="kind"
                 defaultValue="terms"
                 options={DOC_KINDS.map((k) => ({ value: k.value, label: k.label }))}
@@ -145,6 +146,7 @@ export default async function AdminApp({ params }: { params: Promise<{ app: stri
             <div className={styles.field}>
               <span className={styles.label}>기본 언어</span>
               <Choice
+                id="app.defaultLocale"
                 name="defaultLocale"
                 defaultValue={meta.defaultLocale}
                 options={LOCALES.map((l) => ({ value: l.value, label: l.label }))}
@@ -160,6 +162,7 @@ export default async function AdminApp({ params }: { params: Promise<{ app: stri
               저장
             </button>
             <DangerAction
+              id="app.remove"
               action={removeApp}
               fields={{ slug: meta.slug }}
               label="앱 지우기"
