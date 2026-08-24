@@ -13,7 +13,6 @@
 import fs from "node:fs";
 import path from "node:path";
 import { ImageResponse } from "next/og";
-import { STAR_PATH } from "./star";
 
 /** 나눔 카드의 판 — 페이스북·트위터·슬랙·카카오가 모두 이 비율을 기준으로 자른다. */
 export const OG_SIZE = { width: 1200, height: 630 } as const;
@@ -30,16 +29,6 @@ const INK = {
   glow: "#8550E4",
   accent: "#B79AFF",
 } as const;
-
-/** 브랜드의 별 — 카드 안에서는 그림 한 장으로 든다(satori 는 <svg> 를 그림으로 읽는다). */
-const STAR_IMAGE =
-  "data:image/svg+xml;utf8," +
-  encodeURIComponent(
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">` +
-      `<defs><linearGradient id="g" x1="14" y1="86" x2="86" y2="14" gradientUnits="userSpaceOnUse">` +
-      `<stop offset="0" stop-color="${INK.primary}"/><stop offset="1" stop-color="${INK.glow}"/>` +
-      `</linearGradient></defs><path fill="url(#g)" d="${STAR_PATH}"/></svg>`,
-  );
 
 function fontFile(name: string): Buffer {
   return fs.readFileSync(path.join(process.cwd(), "src/assets/fonts", name));
@@ -111,16 +100,22 @@ export function ogCard({ eyebrow, title, lead, domain }: OgCard) {
           padding: "72px 80px",
           background: INK.bg,
           backgroundImage: [
-            `radial-gradient(900px 460px at 88% -12%, rgba(133,80,228,0.42), rgba(17,13,25,0))`,
-            `radial-gradient(700px 420px at -8% 108%, rgba(112,64,217,0.30), rgba(17,13,25,0))`,
+            `radial-gradient(760px 520px at 92% 0%, rgba(183,154,255,0.28), rgba(17,13,25,0))`,
+            `radial-gradient(620px 520px at 78% 36%, rgba(112,64,217,0.22), rgba(17,13,25,0))`,
+            `radial-gradient(700px 420px at -8% 108%, rgba(112,64,217,0.34), rgba(17,13,25,0))`,
           ].join(","),
+          border: "1px solid rgba(183,154,255,0.16)",
+          position: "relative",
+          overflow: "hidden",
           fontFamily: "Pretendard",
           color: INK.text,
         }}
       >
-        {/* 머리 — 별과 서랍 이름. */}
-        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <img src={STAR_IMAGE} width={64} height={64} alt="" />
+        <div style={{ position: "absolute", right: 86, top: 76, width: 250, height: 250, border: "1px solid rgba(183,154,255,0.18)", borderRadius: 999, boxShadow: "0 0 90px rgba(133,80,228,0.18)" }} />
+        <div style={{ position: "absolute", right: 148, top: 138, width: 126, height: 126, border: "1px solid rgba(183,154,255,0.28)", borderRadius: 999 }} />
+        <div style={{ position: "absolute", right: 202, top: 192, width: 18, height: 18, background: INK.accent, borderRadius: 999, boxShadow: "0 0 34px rgba(183,154,255,0.88)" }} />
+        {/* 머리 — 심볼 없이 이름 자체가 브랜드가 된다. */}
+        <div style={{ display: "flex", alignItems: "center" }}>
           <span
             /* 자간을 주지 않는다 — satori 는 양수 자간에서 한글 사이의 **공백 한 칸을 삼킨다**
                («안드로이드를 만들며» → «안드로이드를만들며»). 눈썹에는 라틴만 오는 것이 아니므로,

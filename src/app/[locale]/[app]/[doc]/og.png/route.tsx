@@ -14,7 +14,7 @@ function cardWords(app: string, doc: string, locale: string) {
   const appMeta = readApp(app, locale);
   const version = currentVersion(app, doc, locale);
   return {
-    eyebrow: appMeta?.name ?? site.name,
+    eyebrow: `${site.operator} · ${appMeta?.name ?? site.name}`,
     title: version?.title ?? t.navTerms,
     lead: version?.summary || appMeta?.description || site.tagline,
     domain: DOMAIN,
