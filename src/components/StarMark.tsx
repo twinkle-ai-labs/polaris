@@ -5,9 +5,7 @@
    SVG 의 <defs> id 는 문서에서 하나뿐이어야 하므로 부르는 쪽이 이름을 짓는다 —
    같은 이름이 두 번 있으면 둘째부터 첫째의 그라데이션을 본다. */
 
-const STAR_PATH =
-  "M50 12 C58.36 36.624 63.376 41.64 88 50 C63.376 58.36 58.36 63.376 50 88 " +
-  "C41.64 63.376 36.624 58.36 12 50 C36.624 41.64 41.64 36.624 50 12 Z";
+import { STAR_PATH } from "@/lib/star";
 
 export default function StarMark({
   gradientId,
@@ -51,5 +49,3 @@ export default function StarMark({
     </svg>
   );
 }
-
-export { STAR_PATH };

@@ -10,7 +10,7 @@
 import type { Metadata } from "next";
 import { publishedLocales, readSite, readVersion } from "./content.mjs";
 import { LOCALES } from "./labels";
-import { isDrawable } from "./og";
+import { isDrawable, OG_SIZE } from "./og";
 import { appPath, docPath, localeHome, versionPath } from "./site";
 
 const site = readSite();
@@ -123,8 +123,7 @@ export function docOgImage(locale: string, app: string, doc: string, ...words: (
   return isDrawable(...words) ? `${docPath(locale, app, doc)}og.png` : SITE_OG_IMAGE;
 }
 
-/** 나눔 카드의 크기 — 문서마다 제 카드가 서므로 주소는 부르는 쪽이 준다. */
-export const OG_IMAGE_SIZE = { width: 1200, height: 630 } as const;
+/** 나눔 카드의 크기 — 굽는 쪽([lib/og])이 정하고 여기서는 가리키기만 한다. */
 
 /**
  * 한 장의 나눔 정보(OpenGraph·트위터) 한 벌.
@@ -145,7 +144,7 @@ export function shareCard({
   locale: string;
   image?: string;
 }): Pick<Metadata, "openGraph" | "twitter"> {
-  const imageEntry = { url: image, ...OG_IMAGE_SIZE, alt: title, type: "image/png" };
+  const imageEntry = { url: image, ...OG_SIZE, alt: title, type: "image/png" };
   return {
     openGraph: {
       type: "website",

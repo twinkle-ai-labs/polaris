@@ -13,10 +13,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import { ImageResponse } from "next/og";
+import { STAR_PATH } from "./star";
 
 /** 나눔 카드의 판 — 페이스북·트위터·슬랙·카카오가 모두 이 비율을 기준으로 자른다. */
 export const OG_SIZE = { width: 1200, height: 630 } as const;
-export const OG_CONTENT_TYPE = "image/png";
 
 /* Aurora Ledger — 카드는 **다크 한 벌**로 선다.
    나눔 카드가 설 자리(타임라인·메신저)의 바탕은 우리가 못 정하므로, 어느 바탕에
@@ -30,10 +30,6 @@ const INK = {
   glow: "#8550E4",
   accent: "#B79AFF",
 } as const;
-
-const STAR_PATH =
-  "M50 12 C58.36 36.624 63.376 41.64 88 50 C63.376 58.36 58.36 63.376 50 88 " +
-  "C41.64 63.376 36.624 58.36 12 50 C36.624 41.64 41.64 36.624 50 12 Z";
 
 /** 브랜드의 별 — 카드 안에서는 그림 한 장으로 든다(satori 는 <svg> 를 그림으로 읽는다). */
 const STAR_IMAGE =
