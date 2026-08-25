@@ -1,0 +1,12 @@
+{
+  "name": {
+    "ko": "Pocket PDF",
+    "en": "Pocket PDF"
+  },
+  "description": {
+    "ko": "병합·분할·변환·OCR·잠금 해제까지, 문서가 기기 밖으로 나가지 않는 PDF 도구.",
+    "en": "Merge, split, convert, OCR and unlock PDFs — your documents never leave your device."
+  },
+  "defaultLocale": "ko",
+  "homepage": ""
+}
