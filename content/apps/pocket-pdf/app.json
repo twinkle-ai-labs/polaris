@@ -1,11 +1,29 @@
 {
   "name": {
     "ko": "Pocket PDF",
-    "en": "Pocket PDF"
+    "en": "Pocket PDF",
+    "de": "Pocket PDF",
+    "es": "Pocket PDF",
+    "fr": "Pocket PDF",
+    "it": "Pocket PDF",
+    "ja": "Pocket PDF",
+    "id": "Pocket PDF",
+    "pt-BR": "Pocket PDF",
+    "zh-CN": "Pocket PDF",
+    "zh-TW": "Pocket PDF"
   },
   "description": {
-    "ko": "병합·분할·변환·OCR·잠금 해제까지, 문서가 기기 밖으로 나가지 않는 PDF 도구.",
-    "en": "Merge, split, convert, OCR and unlock PDFs — your documents never leave your device."
+    "ko": "병합·분할·변환·OCR·분석까지, 문서가 기기 밖으로 나가지 않는 PDF 도구.",
+    "en": "Merge, split, convert, OCR and analyze PDFs — your documents never leave your device.",
+    "de": "Zusammenführen, Aufteilen, Umwandeln, OCR und Analyse — Ihre Dokumente verlassen das Gerät nie.",
+    "es": "Combinar, dividir, convertir, OCR y analizar PDF: tus documentos nunca salen del dispositivo.",
+    "fr": "Fusionner, diviser, convertir, OCR et analyser vos PDF — vos documents ne quittent jamais l'appareil.",
+    "it": "Unire, dividere, convertire, OCR e analizzare i PDF: i tuoi documenti non lasciano mai il dispositivo.",
+    "ja": "結合・分割・変換・OCR・分析まで、書類が端末の外へ出ない PDF ツール。",
+    "id": "Menggabungkan, memisahkan, mengubah, OCR, dan menganalisis PDF — dokumen tidak pernah keluar dari perangkat.",
+    "pt-BR": "Juntar, dividir, converter, OCR e analisar PDFs — seus documentos nunca saem do aparelho.",
+    "zh-CN": "合并、拆分、转换、OCR 与分析，文档始终留在设备上的 PDF 工具。",
+    "zh-TW": "合併、分割、轉換、OCR 與分析，文件始終留在裝置上的 PDF 工具。"
   },
   "defaultLocale": "ko",
   "homepage": ""

@@ -172,7 +172,15 @@ for (const app of readdirSync(APPS)) {
       // ── 축 1 · 옮기다 만 자리 ──
       if (locale !== "ko" && /[가-힣]/.test(body)) fail(`${where}: 한글이 남아 있다`);
       if (["ja", "zh-CN", "zh-TW"].includes(locale)) {
-        const allow = new Set(["Twinkle", "AI", "Labs", "Google", "AdMob", "IP", "ID", "OS",
+        /*
+         * 옮기지 **않는 것**들. 셋으로 갈린다:
+         *   · 이름 — Twinkle AI Labs · Pocket PDF · Google Play. 이름은 한 벌이라 번역하지 않는다
+         *   · 규격·기술 — PDF · OCR · Android · IP · ID · OS. 그 나라에서도 그대로 부른다
+         *   · 주소 조각 — 메일과 링크에 든 낱말들
+         * 여기 없는 라틴 낱말이 CJK 문서에 있으면 그것은 «옮기다 만 자리»다.
+         */
+        const allow = new Set(["Twinkle", "AI", "Labs", "Google", "AdMob", "Play", "IP", "ID", "OS",
+          "PDF", "OCR", "Android", "Pocket", "pocket", "pdf",
           "twinkle", "ai", "labs", "gmail", "com", "policies", "google", "privacy", "https", "stock", "calculator"]);
         const stray = [...new Set([...body.matchAll(/[A-Za-z]{2,}/g)].map((m) => m[0]))].filter((w) => !allow.has(w));
         if (stray.length) fail(`${where}: 옮기지 않은 낱말 ${stray.join(", ")}`);
