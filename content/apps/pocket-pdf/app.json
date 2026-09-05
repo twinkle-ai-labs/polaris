@@ -13,17 +13,17 @@
     "zh-TW": "Pocket PDF"
   },
   "description": {
-    "ko": "병합·분할·변환·OCR·분석까지, 문서가 기기 밖으로 나가지 않는 PDF 도구.",
-    "en": "Merge, split, convert, OCR and analyze PDFs — your documents never leave your device.",
-    "de": "Zusammenführen, Aufteilen, Umwandeln, OCR und Analyse — Ihre Dokumente verlassen das Gerät nie.",
-    "es": "Combinar, dividir, convertir, OCR y analizar PDF: tus documentos nunca salen del dispositivo.",
-    "fr": "Fusionner, diviser, convertir, OCR et analyser vos PDF — vos documents ne quittent jamais l'appareil.",
-    "it": "Unire, dividere, convertire, OCR e analizzare i PDF: i tuoi documenti non lasciano mai il dispositivo.",
-    "ja": "結合・分割・変換・OCR・分析まで、書類が端末の外へ出ない PDF ツール。",
-    "id": "Menggabungkan, memisahkan, mengubah, OCR, dan menganalisis PDF — dokumen tidak pernah keluar dari perangkat.",
-    "pt-BR": "Juntar, dividir, converter, OCR e analisar PDFs — seus documentos nunca saem do aparelho.",
-    "zh-CN": "合并、拆分、转换、OCR 与分析，文档始终留在设备上的 PDF 工具。",
-    "zh-TW": "合併、分割、轉換、OCR 與分析，文件始終留在裝置上的 PDF 工具。"
+    "ko": "OCR·서명·병합·분할·페이지 편집이 전부 무료, 구독 없이 한 번 결제. 문서는 기기 밖으로 나가지 않는 PDF 도구.",
+    "en": "OCR, sign, merge, split and edit pages — all free, one payment and no subscription. Your documents never leave your device.",
+    "de": "OCR, Signatur, Zusammenfügen, Teilen und Seiteneditor — alles kostenlos, eine Zahlung statt Abo. Ihre Dokumente verlassen das Gerät nie.",
+    "es": "OCR, firma, unir, dividir y editar páginas, todo gratis; un solo pago y sin suscripción. Tus documentos nunca salen del dispositivo.",
+    "fr": "OCR, signature, fusion, division et pages — tout est gratuit, un seul paiement, sans abonnement. Vos documents ne quittent jamais l'appareil.",
+    "it": "OCR, firma, unione, divisione e pagine: tutto gratis, un solo pagamento e nessun abbonamento. I tuoi documenti non lasciano mai il dispositivo.",
+    "ja": "OCR・署名・結合・分割・ページ編集はすべて無料。サブスクなしの一度きりの購入で、書類が端末の外へ出ない PDF ツール。",
+    "id": "OCR, tanda tangan, gabung, pisah, dan edit halaman — semuanya gratis, sekali bayar tanpa langganan. Dokumen tidak pernah keluar dari perangkat.",
+    "pt-BR": "OCR, assinar, juntar, dividir e editar páginas, tudo de graça; um pagamento só, sem mensalidade. Seus documentos nunca saem do aparelho.",
+    "zh-CN": "OCR、签名、合并、拆分、页面编辑全部免费，一次付费、没有订阅，文档始终留在设备上的 PDF 工具。",
+    "zh-TW": "OCR、簽名、合併、分割、頁面編輯全部免費，一次付費、沒有訂閱，文件始終留在裝置上的 PDF 工具。"
   },
   "defaultLocale": "ko",
   "homepage": ""
