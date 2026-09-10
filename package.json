@@ -5,7 +5,7 @@
   "description": "Polaris — 여러 앱의 약관을 한 곳에서 기르고, 공개 페이지와 API 두 갈래로 뿌린다.",
   "scripts": {
     "dev": "lsof -ti:3942 | xargs kill -9 2>/dev/null || true && next dev -p ${PORT:-3942}",
-    "build": "npm run verify && sh scripts/guard-dev.sh && POLARIS_EXPORT=1 next build && rm -rf out && mv .next-export out && node scripts/stamp-lang.mjs && node scripts/emit-api.mjs",
+    "build": "npm run verify && sh scripts/guard-dev.sh && POLARIS_EXPORT=1 next build && rm -rf out && mv .next-export out && node scripts/stamp-lang.mjs && node scripts/emit-api.mjs && node scripts/emit-legacy.mjs",
     "preview": "npm run build && npx --yes serve out -l 3943",
     "verify": "node scripts/verify-docs.mjs"
   },
