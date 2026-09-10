@@ -23,20 +23,8 @@ export function localeHome(locale: string, defaultLocale: string): string {
   return locale === defaultLocale ? "/" : `/${locale}/`;
 }
 
-/** 한 앱의 문서 목록. */
-export function appPath(locale: string, app: string): string {
-  return `/${locale}/${app}/`;
-}
-
-/** 한 문서의 현행 판. */
-export function docPath(locale: string, app: string, doc: string): string {
-  return `/${locale}/${app}/${doc}/`;
-}
-
-/** 한 문서의 특정 판본 — 앱이 «이 판본에 동의했다»를 가리킬 때도 이 주소를 쓴다. */
-export function versionPath(locale: string, app: string, doc: string, version: number): string {
-  return `/${locale}/${app}/${doc}/v/${version}/`;
-}
+/** 앱 · 문서 · 판본의 길은 `paths.mjs` 한 자리에 산다 — 빌드 뒤 스크립트도 같은 함수를 부른다. */
+export { appPath, docPath, versionPath } from "./paths.mjs";
 
 /** 메뉴 한 칸. `key` 로 「지금 서 있는 곳」을 가린다 — 주소를 견주면 슬래시 하나에 어긋난다. */
 export type NavLink = { key: string; label: string; href: string; isInternal: boolean };

@@ -158,8 +158,25 @@ for (const app of readdirSync(APPS)) {
         fail(`${where}: 목록 묶음 [${s.groups}] ≠ 정본 [${canonSkel.groups}]`);
       if (!eq(s.ordered, canonSkel.ordered))
         fail(`${where}: 번호 [${s.ordered}] ≠ 정본 [${canonSkel.ordered}]`);
-      if (!eq(s.links, canonSkel.links))
+      /*
+       * 안쪽 링크는 **그 문서의 언어**로 간다 — 프랑스어 약관의 «방침»은 프랑스어 방침이다.
+       * 그래서 정본과 견줄 때는 첫 칸(언어)을 걷고 견준다. 걷지 않으면 언어마다 링크가 달라
+       * 모두 빨갛고, 모두 같게 두면 모두 한국어로 간다.
+       */
+      const place = (links, lang) => links.map((l) => l.replace(new RegExp(`^/${lang}/`), "/{locale}/"));
+      if (!eq(place(s.links, locale), place(canonSkel.links, "ko")))
         fail(`${where}: 링크 [${s.links}] ≠ 정본 [${canonSkel.links}]`);
+
+      // ── 축 1 · 안쪽 링크가 설 곳 ──
+      // ↩ 본문이 걷힌 `/t/<앱>/privacy/` 를 들고 있었다(2026-08-24 에 걷고 2026-09-10 에 찾았다).
+      // 넘김 장이 있어 404 는 아니었지만 언어가 없는 주소라 열한 언어가 모두 한국어 방침으로 갔다.
+      for (const link of s.links.filter((l) => l.startsWith("/"))) {
+        const m = link.match(/^\/([^/]+)\/([^/]+)\/([^/]+)\/$/);
+        if (!m || m[1] !== locale)
+          fail(`${where}: 안쪽 링크 «${link}» 가 이 문서의 언어로 가지 않는다 — /${locale}/<앱>/<문서>/ 꼴이어야 한다`);
+        else if (!existsSync(join(APPS, m[2], m[3], m[1], "1.md")))
+          fail(`${where}: 안쪽 링크 «${link}» 가 설 문서가 없다`);
+      }
 
       // ── 축 1 · 이름과 연락처 ──
       if (/(?<!AI )\bTwinkle Labs\b/.test(body)) fail(`${where}: «Twinkle Labs» — 이름은 «Twinkle AI Labs» 한 벌이다`);
@@ -181,7 +198,9 @@ for (const app of readdirSync(APPS)) {
          */
         const allow = new Set(["Twinkle", "AI", "Labs", "Google", "AdMob", "Play", "IP", "ID", "OS",
           "PDF", "OCR", "Android", "Pocket", "pocket", "pdf",
-          "twinkle", "ai", "labs", "gmail", "com", "policies", "google", "privacy", "https", "stock", "calculator"]);
+          "twinkle", "ai", "labs", "gmail", "com", "policies", "google", "privacy", "https", "stock", "calculator",
+          // 안쪽 링크의 첫 칸 — 그 문서의 언어 코드(`/ja/…` · `/zh-CN/…`)
+          "ja", "zh", "CN", "TW"]);
         const stray = [...new Set([...body.matchAll(/[A-Za-z]{2,}/g)].map((m) => m[0]))].filter((w) => !allow.has(w));
         if (stray.length) fail(`${where}: 옮기지 않은 낱말 ${stray.join(", ")}`);
       }
