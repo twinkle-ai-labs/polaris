@@ -135,13 +135,34 @@ for (const app of readdirSync(APPS)) {
   for (const kind of readdirSync(appDir).filter((d) => existsSync(join(appDir, d, "doc.json")))) {
     const kindDir = join(appDir, kind);
     const locales = readdirSync(kindDir).filter((d) => existsSync(join(kindDir, d, "1.md")));
-    const canon = parse(join(kindDir, "ko", "1.md"));
+    /*
+     * **판마다** 견준다 (2026-09-16). ↩ `1.md` 만 읽었다. 제2판이 서자 새 판은 아무 검사도 거치지
+     * 않고 나갈 뻔했다 — 조항을 빠뜨린 번역도, 시행일이 다른 언어도 초록으로 지나간다.
+     * 약속은 판마다 새로 하는 것이라, 견주는 것도 판마다다. 정본(ko)에 있는 판은 모든 언어에 있어야 한다.
+     */
+    const editionsOf = (locale) =>
+      readdirSync(join(kindDir, locale))
+        .map((f) => f.match(/^(\d+)\.md$/))
+        .filter(Boolean)
+        .map((m) => Number(m[1]))
+        .sort((a, b) => a - b);
+    const editions = editionsOf("ko");
+    for (const locale of locales)
+      for (const extra of editionsOf(locale).filter((n) => !editions.includes(n)))
+        fail(`${app}/${kind}/${locale}: 제${extra}판이 정본(ko)에 없다 — 옮길 원문이 없는 판이다`);
+
+    for (const edition of editions) {
+    const canon = parse(join(kindDir, "ko", `${edition}.md`));
     const canonSkel = skeleton(canon.body);
 
     for (const locale of locales) {
       seenLocales.add(locale);
-      const where = `${app}/${kind}/${locale}`;
-      const { front, body } = parse(join(kindDir, locale, "1.md"));
+      const where = edition === 1 ? `${app}/${kind}/${locale}` : `${app}/${kind}/${locale} 제${edition}판`;
+      if (!existsSync(join(kindDir, locale, `${edition}.md`))) {
+        fail(`${where}: 이 판이 없다 — 이 언어만 옛 약속으로 남는다`);
+        continue;
+      }
+      const { front, body } = parse(join(kindDir, locale, `${edition}.md`));
 
       // ── 축 1 · 그릇과 판 ──
       if (!front.title) fail(`${where}: title 이 없다`);
@@ -350,6 +371,7 @@ for (const app of readdirSync(APPS)) {
           }
         }
       }
+    }
     }
   }
 }
