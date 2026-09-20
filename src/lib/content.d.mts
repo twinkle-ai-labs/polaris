@@ -26,11 +26,16 @@ export type VersionDoc = {
   title: string;
   status: "draft" | "published";
   effectiveAt: string;
+  /** 며칠 앞서 알리기로 약속한 판인가. 안 적었으면 null — 세는 쪽이 DEFAULT_NOTICE_DAYS 로 본다 */
+  notice: number | null;
   summary: string;
   body: string;
 };
 
 export const CONTENT_DIR: string;
+export const DEFAULT_NOTICE_DAYS: number;
+/** 오늘 — 운영자의 시간대(site.json 의 timezone)로 센 `YYYY-MM-DD` */
+export function today(): string;
 export function parseFrontmatter(raw: string): { data: Record<string, string>; body: string };
 export function toFrontmatter(data: Record<string, unknown>, body: string): string;
 export function readSite(locale?: string): Site;

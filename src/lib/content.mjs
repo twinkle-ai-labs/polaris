@@ -180,10 +180,21 @@ export function readVersion(appSlug, docSlug, locale, version) {
     title: data.title || "",
     status: data.status === "published" ? "published" : "draft",
     effectiveAt: data.effectiveAt || "",
+    /*
+     * 이 판을 **며칠 앞서 알리기로 약속했나**. 약관 2조는 «사전에 공지»(통상 한 주)와
+     * «불리한 변경은 30일 전»을 나눠 적는데, 어느 쪽인지는 글을 읽고 사람이 정한다 —
+     * 기계는 그 판단을 못 한다. 그래서 사람이 정한 수를 여기 적어 두고,
+     * `scripts/check-notice.mjs` 가 내보내는 날 그 약속이 지켜지는지 센다.
+     * 안 적혀 있으면 [DEFAULT_NOTICE_DAYS] 로 본다.
+     */
+    notice: Number(data.notice) > 0 ? Number(data.notice) : null,
     summary: data.summary || "",
     body,
   };
 }
+
+/** 약속을 안 적은 판의 공지 기간 — 통상의 한 주 (Polaris 2026-09-16 · Pocket PDF 제2판) */
+export const DEFAULT_NOTICE_DAYS = 7;
 
 export function nextVersionNo(appSlug, docSlug, locale) {
   const all = listVersions(appSlug, docSlug, locale);
@@ -198,7 +209,7 @@ export function nextVersionNo(appSlug, docSlug, locale) {
  * UTC로 세면 «9월 1일 시행»이 한국에서 그날 아침 9시에야 바뀐다 — 시행일은
  * 약속한 날의 0시부터라야 약속이다. 시간대는 site.json의 `timezone`이 정한다.
  */
-function today() {
+export function today() {
   const zone = readSite().timezone;
   try {
     // en-CA 는 YYYY-MM-DD 로 적는다 — 우리 파일의 날짜 형식과 같다.
