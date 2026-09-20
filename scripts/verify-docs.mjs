@@ -169,6 +169,10 @@ for (const app of readdirSync(APPS)) {
       if (!front.summary) fail(`${where}: summary 가 없다`);
       if (front.effectiveAt !== canon.front.effectiveAt)
         fail(`${where}: 시행일이 정본과 다르다 (${front.effectiveAt} ≠ ${canon.front.effectiveAt})`);
+      // 공지 기간도 약속이다 — 언어마다 다르면 그 언어의 사용자에게만 다른 약속을 한 것이 된다.
+      // 이 수를 실제로 세는 것은 `check-notice.mjs` 이고, 여기서는 한 벌인지만 본다
+      if ((front.notice ?? "") !== (canon.front.notice ?? ""))
+        fail(`${where}: 공지 기간이 정본과 다르다 (${front.notice ?? "없음"} ≠ ${canon.front.notice ?? "없음"})`);
       if (front.status !== "published") notes.push(`${where}: status=${front.status}`);
 
       // ── 축 1 · 뼈대 ──
