@@ -105,10 +105,13 @@ export function readSite(locale) {
 }
 
 export function listApps(locale) {
+  // 표시 언어가 달라져도 제품의 노출 순서는 유지한다.
+  const order = new Map(["stock-calculator", "pocket-pdf", "exchange-rate"].map((slug, i) => [slug, i]));
   return dirs(APPS_DIR)
     .map((slug) => readApp(slug, locale))
     .filter(Boolean)
-    .sort((a, b) => a.name.localeCompare(b.name, locale || "ko"));
+    .sort((a, b) => (order.get(a.slug) ?? Infinity) - (order.get(b.slug) ?? Infinity)
+      || a.name.localeCompare(b.name, locale || "ko"));
 }
 
 export function readApp(slug, locale) {

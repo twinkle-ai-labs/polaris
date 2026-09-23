@@ -5,14 +5,26 @@
   right: 0;
   width: auto;
   max-width: 100vw;
+  box-sizing: border-box;
   height: 4rem;
   z-index: 20;
   background: transparent;
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
-  border-bottom: 1px solid transparent;
+  border-bottom: var(--stroke-hair) solid transparent;
   box-shadow: none;
-  transition: background var(--motion-base) var(--ease-entering), border-color var(--motion-base) var(--ease-entering), box-shadow var(--motion-base) var(--ease-entering), backdrop-filter var(--motion-base) var(--ease-entering);
+  transition: background var(--motion-base) var(--ease), border-color var(--motion-base) var(--ease), box-shadow var(--motion-base) var(--ease), backdrop-filter var(--motion-base) var(--ease);
+}
+
+.scrollProgress {
+  position: absolute;
+  inset: auto 0 -1px;
+  height: 3px;
+  background: linear-gradient(90deg, #8756e8 0%, #b78af4 45%, #e2acd8 72%, #98d4ed 100%);
+  border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
+  box-shadow: 0 1px 8px color-mix(in srgb, var(--primary) 25%, transparent);
+  transform-origin: left;
+  pointer-events: none;
 }
 
 .headerScrolled {
