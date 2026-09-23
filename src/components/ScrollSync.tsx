@@ -19,7 +19,11 @@ export default function ScrollSync() {
 
     const publish = () => {
       frame = 0;
-      dispatch(scrollChanged({ offset: window.scrollY, viewportHeight: window.innerHeight }));
+      dispatch(scrollChanged({
+        offset: window.scrollY,
+        viewportHeight: window.innerHeight,
+        documentHeight: document.documentElement.scrollHeight,
+      }));
     };
 
     const request = () => {
@@ -29,10 +33,13 @@ export default function ScrollSync() {
     publish();
     window.addEventListener("scroll", request, { passive: true });
     window.addEventListener("resize", request);
+    const observer = new ResizeObserver(request);
+    observer.observe(document.body);
 
     return () => {
       window.removeEventListener("scroll", request);
       window.removeEventListener("resize", request);
+      observer.disconnect();
       if (frame) window.cancelAnimationFrame(frame);
     };
   }, [dispatch]);

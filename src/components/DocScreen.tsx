@@ -74,6 +74,9 @@ export default function DocScreen({
       {!isArchived && upcoming ? (
         <p className={styles.notice}>
           {t.upcoming(formatDate(upcoming.effectiveAt, locale), upcoming.version)}
+          {upcoming.version !== version.version ? (
+            <> {" "}<Link href={versionPath(locale, app.slug, doc.slug, upcoming.version)}>{t.editionNo(upcoming.version)}</Link></>
+          ) : null}
         </p>
       ) : null}
 

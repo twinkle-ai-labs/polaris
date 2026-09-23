@@ -39,12 +39,12 @@ const REQUIRED_EVERYWHERE = {
   "연락처": ["twinkle.ai.labs@gmail.com"],
 };
 
-/** 다섯 축은 GDPR·PIPA·APPI·LGPD·PIPL 이 공통으로 요구한다. 지금 우리 방침에는 하나도 없다 */
+/** 관할별 추가 검토 사항. 제2판의 설명 보완과 법적 적정성 판단은 별개다. */
 const NOT_YET = {
   "처리의 법적 근거": "광고 처리의 근거를 «동의»로 둘지 «정당한 이익»으로 둘지 정한 적이 없다",
-  "보유 기간": "«앱을 지우면 사라진다»는 적었지만 기간으로 적지 않았다. 광고 쪽 보유는 Google 이 정한다",
+  "보유 기간": "제2판은 내부 데이터 삭제와 문의 종료 후 삭제를 안내한다. Google의 항목별 보유 기간과 법정 보존 의무는 추가 확인이 필요하다",
   "국외 이전": "AdMob 이 데이터를 어디로 보내는지 확인해 적은 적이 없다",
-  "정보주체의 권리": "열람·정정·삭제·이의를 어떻게 받을지 절차를 정한 적이 없다. 받을 데이터가 없다는 것과 권리를 안 적는 것은 다른 문제다",
+  "정보주체의 권리": "제2판에 요청 창구와 기기·Google 정보의 처리 안내를 추가했다. 관할별 응답 기한과 이의 절차는 추가 검토가 필요하다",
   "감독기관에 대한 불복": "관할마다 기관이 다르다. 관할별로 적어야 한다",
 };
 
@@ -222,11 +222,12 @@ for (const app of readdirSync(APPS)) {
          * 여기 없는 라틴 낱말이 CJK 문서에 있으면 그것은 «옮기다 만 자리»다.
          */
         const allow = new Set(["Twinkle", "AI", "Labs", "Google", "AdMob", "Play", "IP", "ID", "OS",
-          "PDF", "OCR", "Android", "Pocket", "pocket", "pdf",
+          "PDF", "OCR", "Android", "Pocket", "pocket", "pdf", "Polaris",
           "twinkle", "ai", "labs", "gmail", "com", "policies", "google", "privacy", "https", "stock", "calculator",
           // 안쪽 링크의 첫 칸 — 그 문서의 언어 코드(`/ja/…` · `/zh-CN/…`)
           "ja", "zh", "CN", "TW"]);
-        const stray = [...new Set([...body.matchAll(/[A-Za-z]{2,}/g)].map((m) => m[0]))].filter((w) => !allow.has(w));
+        const prose = body.replace(/https?:\/\/[^\s)]+/g, "");
+        const stray = [...new Set([...prose.matchAll(/[A-Za-z]{2,}/g)].map((m) => m[0]))].filter((w) => !allow.has(w));
         if (stray.length) fail(`${where}: 옮기지 않은 낱말 ${stray.join(", ")}`);
       }
 
@@ -238,7 +239,7 @@ for (const app of readdirSync(APPS)) {
 
       // ── 축 1 · 숫자 ──
       // «30일 전 공지»가 «15일»이 되면 다른 약속이다. 연령은 관할마다 다르므로 축 2 에서 따로 본다
-      const nums = (t) => [...t.matchAll(/(?<![\w.])(\d{2,})(?![\w.])/g)].map((m) => m[1]).sort();
+      const nums = (t) => [...t.replace(/^##.*$/gm, "").matchAll(/(?<!\d)(\d{2,})(?!\d)/g)].map((m) => m[1]).sort();
       if (!eq(nums(body), nums(canon.body)))
         notes.push(`${where}: 숫자가 정본과 다르다 [${nums(body)}] ≠ [${nums(canon.body)}]`);
 
@@ -275,7 +276,7 @@ for (const app of readdirSync(APPS)) {
       for (const [chosen, rivals] of TERM_PAIRS[locale] ?? []) {
         if (!body.includes(chosen)) continue;
         for (const rival of rivals)
-          if (body.includes(rival))
+          if (new RegExp(`(?<![\\p{L}])${rival.trim()}(?![\\p{L}])`, "u").test(body))
             fail(`${where}: «${chosen}» 와 «${rival}» 가 섞여 있다 — 같은 것은 한 낱말로`);
       }
 
@@ -358,11 +359,13 @@ for (const app of readdirSync(APPS)) {
         } else {
           for (const [topic, kws] of Object.entries(REQUIRED_EVERYWHERE))
             if (!kws.some((k) => body.includes(k))) fail(`${where}: «${topic}» 가 문서에서 안 보인다`);
-          /*
-           * 단위말로 찾지 않는다 — «under 16» 처럼 숫자 뒤에 아무것도 안 붙는 언어가 있다.
-           * 방침 본문에 두 자리 수는 연령 하나뿐이므로 그냥 두 자리 수를 센다.
-           */
-          const ages = [...new Set([...body.matchAll(/(?<![\w.])(\d{2})(?![\w.])/g)].map((m) => m[1]))];
+          // 공지 기간(30일)과 조문 번호는 연령이 아니다. 아동 조항 본문에서만 센다.
+          const childHeading = /아동|children|Kinder|menores|enfants|minori|crianças|anak|子ども|子供|児童|儿童|兒童/i;
+          const childText = body.split(/^##\s+/m)
+            .filter((section) => childHeading.test(section.split("\n")[0]))
+            .map((section) => section.slice(section.indexOf("\n")))
+            .join("\n");
+          const ages = [...new Set([...childText.matchAll(/(?<!\d)(\d{2})(?!\d)/g)].map((m) => m[1]))];
           const age = ages.length === 1 ? [null, ages[0]] : null;
           if (ages.length > 1) fail(`${where}: 두 자리 수가 여럿이다 [${ages}] — 어느 것이 연령인지 알 수 없다`);
           if (!age) {
