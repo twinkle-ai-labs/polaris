@@ -2,7 +2,7 @@
 
 import styles from "@/app/layout.module.css";
 import { useAppSelector } from "@/store/hooks";
-import { selectIsPageScrolled } from "@/store/scrollSlice";
+import { selectIsPageScrolled, selectScrollProgress } from "@/store/scrollSlice";
 
 /**
  * 머리띠의 껍데기 — 한 픽셀이라도 내려가면 판에서 떠오른다.
@@ -12,10 +12,16 @@ import { selectIsPageScrolled } from "@/store/scrollSlice";
  */
 export default function HeaderBar({ children }: { children: React.ReactNode }) {
   const isScrolled = useAppSelector(selectIsPageScrolled);
+  const progress = useAppSelector(selectScrollProgress);
 
   return (
     <header className={`${styles.header} ${isScrolled ? styles.headerScrolled : ""}`}>
       {children}
+      <span
+        className={styles.scrollProgress}
+        style={{ transform: `scaleX(${progress})` }}
+        aria-hidden="true"
+      />
     </header>
   );
 }

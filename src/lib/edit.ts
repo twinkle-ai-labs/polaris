@@ -144,6 +144,13 @@ export async function saveVersion(form: FormData) {
     throw new Error("펴내려면 시행일이 있어야 합니다.");
   }
 
+  /*
+   * 공지 기간은 편집기가 묻지 않는 값이라 **있던 것을 그대로 들고 간다.**
+   * 머리말을 통째로 다시 쓰는 자리이므로, 옮겨 적지 않으면 저장 한 번에 조용히 사라진다 —
+   * 그러면 30일을 약속한 판이 다음 검사부터 한 주짜리로 세어진다 (`check-notice.mjs`).
+   */
+  const notice = readVersion(app, doc, locale, version)?.notice ?? null;
+
   fs.writeFileSync(
     versionFile(app, doc, locale, version),
     toFrontmatter(
@@ -151,6 +158,7 @@ export async function saveVersion(form: FormData) {
         title: text(form, "title"),
         status,
         effectiveAt,
+        notice,
         summary: text(form, "summary"),
       },
       String(form.get("body") ?? ""),

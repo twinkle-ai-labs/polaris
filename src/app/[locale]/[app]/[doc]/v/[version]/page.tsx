@@ -7,6 +7,7 @@ import {
   readApp,
   readDoc,
   readVersion,
+  today,
 } from "@/lib/content.mjs";
 import { strings } from "@/lib/i18n";
 import { docOgImage, shareCard, versionAlternates } from "@/lib/seo";
@@ -66,6 +67,7 @@ export default async function VersionPage({ params }: { params: Promise<VersionP
   if (!appMeta || !docMeta || !found || found.status !== "published") notFound();
 
   const current = currentVersion(app, doc, locale);
+  const isUpcoming = found.effectiveAt > today();
 
   return (
     <Chrome locale={locale}>
@@ -76,8 +78,8 @@ export default async function VersionPage({ params }: { params: Promise<VersionP
         locale={locale}
         /* 지난 판을 읽는 자리에서는 이력을 또 늘어놓지 않는다 — 현행으로 가는 문 하나면 된다. */
         past={[]}
-        upcoming={null}
-        isArchived={current?.version !== found.version}
+        upcoming={isUpcoming ? found : null}
+        isArchived={!isUpcoming && current?.version !== found.version}
       />
     </Chrome>
   );
