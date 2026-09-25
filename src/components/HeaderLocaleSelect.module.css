@@ -1,7 +1,7 @@
 .wrap { position: relative; flex: 0 0 auto; }
 
 .trigger {
-  height: 2.25rem;
+  height: calc(var(--control-row) - var(--s1));
   min-width: 8.75rem;
   display: inline-flex;
   align-items: center;
@@ -105,9 +105,9 @@
 .optionActive { background: var(--primary-soft); color: var(--accent); font-weight: var(--fw-semibold); }
 .check { color: var(--accent); font-size: var(--fs-12); }
 
-@media (max-width: 39.99em) {
-  .trigger { min-width: 2.75rem; width: 2.75rem; padding: 0; justify-content: center; }
+@media (max-width: 55.99em) {
+  .trigger { min-width: calc(var(--control-row) - var(--s0)); width: calc(var(--control-row) - var(--s0)); height: calc(var(--control-row) - var(--s0)); padding: 0; justify-content: center; }
   .current, .chevron { display: none; }
-  .menu { position: fixed; top: 4.5rem; left: 5vw; right: 5vw; width: 90vw; }
+  .menu { position: fixed; top: calc(var(--s7) + var(--s1)); left: var(--s2); right: var(--s2); width: auto; }
   .menuScroll { max-height: calc(100dvh - 7rem); }
 }

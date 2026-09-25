@@ -1,6 +1,6 @@
 .toggle {
-  width: 2.25rem;
-  height: 2.25rem;
+  width: calc(var(--control-row) - var(--s1));
+  height: calc(var(--control-row) - var(--s1));
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -16,3 +16,7 @@
 .toggle:hover { background: var(--primary-soft); color: var(--accent); transform: rotate(8deg); box-shadow: var(--shadow-card); }
 
 .icon { font-size: var(--fs-16); line-height: 1; }
+
+@media (max-width: 55.99em) {
+  .toggle { width: calc(var(--control-row) - var(--s0)); height: calc(var(--control-row) - var(--s0)); }
+}
