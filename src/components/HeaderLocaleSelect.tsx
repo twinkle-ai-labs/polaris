@@ -53,28 +53,50 @@ export default function HeaderLocaleSelect({
   const selected = locales.find((locale) => locale.value === current) ?? locales[0];
   /* 「바깥」이 어디까지인지는 DOM 만 안다 — 클래스 이름으로 견주면 스타일을 손보는 날 조용히 어긋난다. */
   const wrapRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    dispatch(localeMenuClosed());
+  }, [dispatch, pathname]);
+
+  useEffect(() => {
+    const mobile = window.matchMedia("(max-width: 55.99em)");
+    const closeOnResize = () => {
+      if (wrapRef.current?.contains(document.activeElement)) triggerRef.current?.focus();
+      dispatch(localeMenuClosed());
+    };
+    mobile.addEventListener("change", closeOnResize);
+    return () => mobile.removeEventListener("change", closeOnResize);
+  }, [dispatch]);
 
   /* 열려 있는 동안만 바깥을 듣는다 — 닫힌 목록이 문서의 모든 클릭을 붙잡고 있을 이유가 없다. */
   useEffect(() => {
     if (!isOpen) return;
+    wrapRef.current?.querySelector<HTMLElement>("[aria-selected='true']")?.focus();
 
-    const closeOnOutside = (event: MouseEvent) => {
+    const closeOnOutside = (event: PointerEvent | FocusEvent) => {
       if (!wrapRef.current?.contains(event.target as Node)) dispatch(localeMenuClosed());
     };
     const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") dispatch(localeMenuClosed());
+      if (event.key !== "Escape") return;
+      event.preventDefault();
+      dispatch(localeMenuClosed());
+      triggerRef.current?.focus();
     };
 
-    document.addEventListener("mousedown", closeOnOutside);
+    document.addEventListener("pointerdown", closeOnOutside);
+    document.addEventListener("focusin", closeOnOutside);
     document.addEventListener("keydown", closeOnEscape);
     return () => {
-      document.removeEventListener("mousedown", closeOnOutside);
+      document.removeEventListener("pointerdown", closeOnOutside);
+      document.removeEventListener("focusin", closeOnOutside);
       document.removeEventListener("keydown", closeOnEscape);
     };
   }, [dispatch, isOpen]);
 
   function onPick(locale: string) {
     dispatch(localeMenuClosed());
+    triggerRef.current?.focus();
     if (locale === current) return;
     /* 읽던 자리를 지키며 언어만 갈아 끼운다 — 홈으로 튕기면 다시 찾아 들어가야 한다. */
     router.push(
@@ -90,6 +112,7 @@ export default function HeaderLocaleSelect({
   return (
     <div className={styles.wrap} ref={wrapRef}>
       <button
+        ref={triggerRef}
         type="button"
         className={styles.trigger}
         onClick={() => dispatch(localeMenuToggled())}
@@ -119,7 +142,21 @@ export default function HeaderLocaleSelect({
 
       {isOpen ? (
         <div className={styles.menu}>
-          <div className={styles.menuScroll} role="listbox" aria-label={label}>
+          <div
+            className={styles.menuScroll}
+            role="listbox"
+            aria-label={label}
+            onKeyDown={(event) => {
+              if (!["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) return;
+              event.preventDefault();
+              const options = Array.from(event.currentTarget.querySelectorAll<HTMLButtonElement>("[role='option']"));
+              const currentIndex = options.indexOf(document.activeElement as HTMLButtonElement);
+              const index = event.key === "Home" ? 0
+                : event.key === "End" ? options.length - 1
+                : (currentIndex + (event.key === "ArrowDown" ? 1 : -1) + options.length) % options.length;
+              options[index]?.focus();
+            }}
+          >
             {locales.map((locale) => {
               const isSelected = locale.value === current;
               return (

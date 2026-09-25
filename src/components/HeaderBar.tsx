@@ -3,6 +3,7 @@
 import styles from "@/app/layout.module.css";
 import { useAppSelector } from "@/store/hooks";
 import { selectIsPageScrolled, selectScrollProgress } from "@/store/scrollSlice";
+import { selectIsNavigationMenuOpen } from "@/store/navigationMenuSlice";
 
 /**
  * 머리띠의 껍데기 — 한 픽셀이라도 내려가면 판에서 떠오른다.
@@ -13,9 +14,10 @@ import { selectIsPageScrolled, selectScrollProgress } from "@/store/scrollSlice"
 export default function HeaderBar({ children }: { children: React.ReactNode }) {
   const isScrolled = useAppSelector(selectIsPageScrolled);
   const progress = useAppSelector(selectScrollProgress);
+  const isMenuOpen = useAppSelector(selectIsNavigationMenuOpen);
 
   return (
-    <header className={`${styles.header} ${isScrolled ? styles.headerScrolled : ""}`}>
+    <header className={`${styles.header} ${isScrolled || isMenuOpen ? styles.headerScrolled : ""}`}>
       {children}
       <span
         className={styles.scrollProgress}
