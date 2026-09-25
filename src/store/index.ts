@@ -4,6 +4,7 @@ import dialogReducer from "./dialogSlice";
 import { listenerMiddleware } from "./effects";
 import localeReducer from "./localeSlice";
 import localeMenuReducer from "./localeMenuSlice";
+import navigationMenuReducer from "./navigationMenuSlice";
 import scrollReducer from "./scrollSlice";
 import themeReducer from "./themeSlice";
 import versionEditorReducer from "./versionEditorSlice";
@@ -26,6 +27,7 @@ export function makeStore() {
       scroll: scrollReducer,
       locale: localeReducer,
       localeMenu: localeMenuReducer,
+      navigationMenu: navigationMenuReducer,
       choice: choiceReducer,
       dialog: dialogReducer,
       versionEditor: versionEditorReducer,

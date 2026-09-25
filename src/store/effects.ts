@@ -1,6 +1,8 @@
 import { createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
 import { applyTheme, writeStoredTheme } from "@/lib/theme";
 import { localeAdopted, selectLocale } from "./localeSlice";
+import { localeMenuClosed, localeMenuToggled, selectIsLocaleMenuOpen } from "./localeMenuSlice";
+import { navigationMenuClosed, navigationMenuToggled, selectIsNavigationMenuOpen } from "./navigationMenuSlice";
 import { selectTheme, themeAdopted, themeToggled } from "./themeSlice";
 import type { AppDispatch, RootState } from "./index";
 
@@ -15,6 +17,21 @@ import type { AppDispatch, RootState } from "./index";
 export const listenerMiddleware = createListenerMiddleware();
 
 const startListening = listenerMiddleware.startListening.withTypes<RootState, AppDispatch>();
+
+/* 머리글에서는 한 목록만 연다. 어느 버튼에서 열어도 같은 규칙을 따른다. */
+startListening({
+  actionCreator: navigationMenuToggled,
+  effect: (_action, api) => {
+    if (selectIsNavigationMenuOpen(api.getState())) api.dispatch(localeMenuClosed());
+  },
+});
+
+startListening({
+  actionCreator: localeMenuToggled,
+  effect: (_action, api) => {
+    if (selectIsLocaleMenuOpen(api.getState())) api.dispatch(navigationMenuClosed());
+  },
+});
 
 /* ── 테마 ───────────────────────────────────────────────────── */
 

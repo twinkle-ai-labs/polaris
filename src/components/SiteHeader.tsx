@@ -1,12 +1,12 @@
-import Link from "next/link";
 import HeaderBar from "@/components/HeaderBar";
 import HeaderLocaleSelect from "@/components/HeaderLocaleSelect";
+import HeaderNavigation from "@/components/HeaderNavigation";
 import StarMark from "@/components/StarMark";
 import ThemeToggle from "@/components/ThemeToggle";
 import type { Site } from "@/lib/content.mjs";
 import type { Strings } from "@/lib/i18n";
 import { LOCALES } from "@/lib/labels";
-import { CURRENT_NAV_KEY, HOME_URL, navLinks } from "@/lib/site";
+import { HOME_URL, navLinks } from "@/lib/site";
 import styles from "@/app/layout.module.css";
 
 /**
@@ -33,26 +33,7 @@ export default function SiteHeader({
           <StarMark gradientId="twinkle-brand" className={styles.star} />
           <span className={styles.brandName}>{site.operator || site.name}</span>
         </a>
-        <nav className={styles.nav} aria-label={t.mainNav}>
-          {links.map((link) => {
-            const isCurrent = link.key === CURRENT_NAV_KEY;
-            const className = `${styles.navLink} ${isCurrent ? styles.navLinkActive : ""}`;
-            /* 이 집 안의 길은 화면만 갈아 끼운다 — 밖으로 나가는 문만 문서를 새로 연다. */
-            return link.isInternal ? (
-              <Link
-                key={link.key}
-                href={link.href}
-                className={className}
-                aria-current={isCurrent ? "page" : undefined}
-              >
-                {link.label}
-              </Link>
-            ) : (
-              <a key={link.key} href={link.href} className={className}>
-                {link.label}
-              </a>
-            );
-          })}
+        <HeaderNavigation links={links} label={t.mainNav} openLabel={t.openMenu} closeLabel={t.closeMenu}>
           <HeaderLocaleSelect
             locales={LOCALES}
             current={locale}
@@ -60,7 +41,7 @@ export default function SiteHeader({
             label={t.pickLanguage}
           />
           <ThemeToggle toLight={t.toLight} toDark={t.toDark} />
-        </nav>
+        </HeaderNavigation>
       </div>
     </HeaderBar>
   );

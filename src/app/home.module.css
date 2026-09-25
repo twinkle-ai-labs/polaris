@@ -13,6 +13,14 @@
   box-sizing: border-box;
 }
 
+/* 모바일에서는 스크롤바를 포함한 100vw 대신 main의 실제 너비를 확장한다. */
+@media (max-width: 47.99em) {
+  .hero {
+    width: calc(100% + 2 * var(--s2));
+    margin-left: calc(-1 * var(--s2));
+  }
+}
+
 .intro {
   max-width: var(--shell-narrow);
   margin: 0 auto;
