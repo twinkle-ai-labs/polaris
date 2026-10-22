@@ -6,6 +6,8 @@ import { useEffect, useRef } from "react";
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
+    /** 우리 계측의 핑 — Analytics 의 부팅 스크립트가 단다. 측정 ID 가 없는 빌드(dev)에는 없다 */
+    __twinkleBeacon?: () => void;
   }
 }
 
@@ -33,6 +35,8 @@ export default function RouteViews() {
       page_location: window.location.href,
       page_title: document.title,
     });
+    // 우리 계측도 한 장 더 — 첫 장은 부팅 스크립트가 이미 보냈다
+    window.__twinkleBeacon?.();
   }, [path]);
 
   return null;

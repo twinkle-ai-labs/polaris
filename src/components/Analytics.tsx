@@ -22,6 +22,17 @@
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "";
 
 /*
+ * 우리 계측 — 쿠키 없는 핑 하나. GA4 와 **같은 조건**으로 켜진다(측정 ID 가 있을 때만 = 빌드할 때).
+ *
+ * 위의 denied 네 칸 때문에 GA4 는 이 사이트의 사용자를 세지 않는다 — 2026-10-22 에 Observatory 에서 0 으로 봤다.
+ * 배너를 세우지 않기로 한 결정은 지키고, 그 대신 Twinkle API 의 계측 방(/beacon)에 핑 하나를 보낸다.
+ * 보내는 것은 집 · 경로 · 리퍼러뿐이고, 서버가 적는 것은 날 · 집 · 경로 · 유입 호스트 · 나라 · 기기 · 그날만 유효한 해시다 —
+ * IP 도 UA 도 쿠키도 남지 않는다. sendBeacon 은 text/plain 이라 preflight 가 없고, 화면이 닫히는 중에도 간다.
+ * 화면을 갈아 끼울 때는 RouteViews 가 window.__twinkleBeacon 을 한 번 더 부른다.
+ */
+const BEACON_URL = "https://api.twinklelabs.kr/beacon/v1/hit";
+
+/*
  * 로더를 **이 스크립트 안에서** 단다 — `<script async src>` 를 따로 두면 안 된다.
  *
  * Next 는 head 의 async 스크립트를 위로 끌어올린다. 그래서 JSX 에서 동의 기본값을
@@ -36,6 +47,8 @@ gtag('set','ads_data_redaction',true);
 gtag('js',new Date());
 gtag('config','${GA_ID}');
 (function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=${GA_ID}';document.head.appendChild(s)})();
+window.__twinkleBeacon=function(){try{navigator.sendBeacon('${BEACON_URL}',JSON.stringify({host:location.hostname,path:location.pathname,referrer:document.referrer}))}catch(e){}};
+window.__twinkleBeacon();
 `.trim();
 
 export default function Analytics() {
