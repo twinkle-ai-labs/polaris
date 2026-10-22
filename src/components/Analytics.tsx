@@ -1,5 +1,13 @@
 /*
- * GA4 — **쿠키 없이** 센다.
+ * GA4 — 광고 칸은 닫고, 통계 칸만 연다 (2026-10-22 · Founder «GA 정상화»).
+ *
+ * 2026-10-22 까지는 네 칸을 전부 denied 로 못 박았다. 그러면 gtag 는 쿠키 없는 핑만 보내는데,
+ * GA4 는 그 핑을 **보고서에 싣지 않는다** — 사용자도 페이지뷰도 0 이었다(Observatory 에서 봤다).
+ * 그래서 analytics_storage 하나만 granted 로 돌린다: GA4 의 자체 쿠키(_ga)로 사용자 · 페이지뷰 · 유입이 보통처럼 선다.
+ * 광고 세 칸(ad_storage · ad_user_data · ad_personalization)은 그대로 denied 다 — 광고 신호는 보내지 않는다.
+ * 동의 배너는 여전히 세우지 않는다. 그 대신 사람을 잇지 않는 우리 계측(/beacon)도 함께 보낸다.
+ *
+ * ↩ 아래는 그때의 글이다 — 왜 denied 였는지가 남아야 다시 같은 자리를 파지 않는다.
  *
  * 동의 배너를 세우지 않기로 했다. 배너는 사용자에게 우리 사정을 묻는 물건이라,
  * 「사용자는 생각하지 않아도 사용할 수 있어야 한다」와 정면으로 부딪친다.
@@ -42,7 +50,7 @@ const BEACON_URL = "https://api.twinklelabs.kr/beacon/v1/hit";
 const boot = `
 window.dataLayer=window.dataLayer||[];
 function gtag(){dataLayer.push(arguments)}
-gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied'});
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'granted'});
 gtag('set','ads_data_redaction',true);
 gtag('js',new Date());
 gtag('config','${GA_ID}');
