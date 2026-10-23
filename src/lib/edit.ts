@@ -191,7 +191,9 @@ export async function saveSite(form: FormData) {
   writeJson(path.join(CONTENT_DIR, "site.json"), {
     name: text(form, "name") || "Polaris",
     tagline: text(form, "tagline"),
-    domain: text(form, "domain").replace(/^https?:\/\//, "").replace(/\/+$/, ""),
+    domain: text(form, "domain")
+      .replace(/^https?:\/\//, "")
+      .replace(/\/+$/, ""),
     contactEmail: text(form, "contactEmail"),
     defaultLocale: text(form, "defaultLocale") || "ko",
     timezone: text(form, "timezone") || "Asia/Seoul",

@@ -19,11 +19,13 @@ export default function ScrollSync() {
 
     const publish = () => {
       frame = 0;
-      dispatch(scrollChanged({
-        offset: window.scrollY,
-        viewportHeight: window.innerHeight,
-        documentHeight: document.documentElement.scrollHeight,
-      }));
+      dispatch(
+        scrollChanged({
+          offset: window.scrollY,
+          viewportHeight: window.innerHeight,
+          documentHeight: document.documentElement.scrollHeight,
+        }),
+      );
     };
 
     const request = () => {

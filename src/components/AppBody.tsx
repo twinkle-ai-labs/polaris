@@ -38,17 +38,23 @@ export default function AppBody({ app, locale }: { app: string; locale: string }
         {meta.icon ? (
           <Image className={styles.icon} src={meta.icon} alt="" width={112} height={112} />
         ) : null}
-        <h1 className={styles.title}>{meta.name}</h1>
-        {meta.description ? <p className={styles.lead}>{meta.description}</p> : null}
+        <div className={styles.introCopy}>
+          <p className={styles.eyebrow}>{t.archive}</p>
+          <h1 className={styles.title}>{meta.name}</h1>
+          {meta.description ? <p className={styles.lead}>{meta.description}</p> : null}
+        </div>
       </div>
 
       {published.length === 0 ? (
         <p className={styles.blank}>{t.nothingPublished}</p>
       ) : (
         <ul className={styles.list}>
-          {published.map((doc) => (
+          {published.map((doc, index) => (
             <li key={doc.slug}>
               <Link href={docPath(locale, app, doc.slug)} className={styles.row}>
+                <span className={styles.rowNumber} aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
                 <span className={styles.rowMain}>
                   <span className={styles.rowKind}>{t.kinds[doc.kind] ?? t.kinds.custom}</span>
                   <span className={styles.rowName}>{doc.primary?.title || doc.name}</span>
@@ -57,6 +63,9 @@ export default function AppBody({ app, locale }: { app: string; locale: string }
                       ? t.effectiveSince(formatDate(doc.primary.effectiveAt, locale))
                       : ""}
                   </span>
+                </span>
+                <span className={styles.rowArrow} aria-hidden="true">
+                  ↗
                 </span>
               </Link>
             </li>

@@ -1,4 +1,7 @@
-.wrap { position: relative; flex: 0 0 auto; }
+.wrap {
+  position: relative;
+  flex: 0 0 auto;
+}
 
 .trigger {
   height: calc(var(--control-row) - var(--s1));
@@ -14,7 +17,11 @@
   font-size: var(--fs-12);
   font-weight: var(--fw-semibold);
   cursor: pointer;
-  transition: border-color var(--motion-fast) var(--ease-entering), background var(--motion-fast) var(--ease-entering), color var(--motion-fast) var(--ease-entering), box-shadow var(--motion-fast) var(--ease-entering);
+  transition:
+    border-color var(--motion-fast) var(--ease-entering),
+    background var(--motion-fast) var(--ease-entering),
+    color var(--motion-fast) var(--ease-entering),
+    box-shadow var(--motion-fast) var(--ease-entering);
 }
 
 .trigger:hover,
@@ -24,7 +31,9 @@
   color: var(--text);
   box-shadow: var(--shadow-card);
 }
-.trigger:active { transform: scale(0.97); }
+.trigger:active {
+  transform: scale(0.97);
+}
 
 .flag {
   width: 1.25rem;
@@ -35,9 +44,19 @@
   box-shadow: 0 0 0 1px color-mix(in srgb, var(--text) 10%, transparent);
 }
 
-.current { flex: 1; text-align: left; white-space: nowrap; }
-.chevron { flex: none; color: var(--text-faint); transition: transform var(--motion-fast) var(--ease-entering); }
-.chevronOpen { transform: rotate(180deg); }
+.current {
+  flex: 1;
+  text-align: left;
+  white-space: nowrap;
+}
+.chevron {
+  flex: none;
+  color: var(--text-faint);
+  transition: transform var(--motion-fast) var(--ease-entering);
+}
+.chevronOpen {
+  transform: rotate(180deg);
+}
 
 .menu {
   position: absolute;
@@ -55,7 +74,7 @@
   backdrop-filter: blur(1.5rem) saturate(150%);
   box-shadow: var(--shadow-lift);
   transform-origin: top right;
-  animation: openMenu 220ms cubic-bezier(.2, 1.35, .4, 1) both;
+  animation: openMenu 220ms cubic-bezier(0.2, 1.35, 0.4, 1) both;
 }
 
 .menuScroll {
@@ -67,18 +86,37 @@
   scrollbar-color: color-mix(in srgb, var(--accent) 42%, transparent) transparent;
 }
 
-.menuScroll::-webkit-scrollbar { width: 1px; }
-.menuScroll::-webkit-scrollbar-track { margin-block: var(--s1); background: transparent; }
+.menuScroll::-webkit-scrollbar {
+  width: 1px;
+}
+.menuScroll::-webkit-scrollbar-track {
+  margin-block: var(--s1);
+  background: transparent;
+}
 .menuScroll::-webkit-scrollbar-thumb {
   border-radius: var(--radius-pill);
-  background: linear-gradient(to bottom, color-mix(in srgb, var(--accent) 30%, transparent), color-mix(in srgb, var(--primary-lit) 62%, transparent));
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--accent) 30%, transparent),
+    color-mix(in srgb, var(--primary-lit) 62%, transparent)
+  );
 }
-.menuScroll::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+.menuScroll::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
 
 @keyframes openMenu {
-  from { opacity: 0; transform: translateY(-0.5rem) scale(0.96); }
-  70% { transform: translateY(0.0625rem) scale(1.005); }
-  to { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem) scale(0.96);
+  }
+  70% {
+    transform: translateY(0.0625rem) scale(1.005);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .option {
@@ -97,17 +135,50 @@
   font-weight: var(--fw-medium);
   text-align: left;
   cursor: pointer;
-  transition: background var(--motion-fast) var(--ease-entering), color var(--motion-fast) var(--ease-entering), transform var(--motion-fast) var(--ease-entering);
+  transition:
+    background var(--motion-fast) var(--ease-entering),
+    color var(--motion-fast) var(--ease-entering),
+    transform var(--motion-fast) var(--ease-entering);
 }
 
-.option:hover { background: var(--sunken); color: var(--text); transform: translateX(0.125rem); }
-.option:active { transform: translateX(0.125rem) scale(0.985); }
-.optionActive { background: var(--primary-soft); color: var(--accent); font-weight: var(--fw-semibold); }
-.check { color: var(--accent); font-size: var(--fs-12); }
+.option:hover {
+  background: var(--sunken);
+  color: var(--text);
+  transform: translateX(0.125rem);
+}
+.option:active {
+  transform: translateX(0.125rem) scale(0.985);
+}
+.optionActive {
+  background: var(--primary-soft);
+  color: var(--accent);
+  font-weight: var(--fw-semibold);
+}
+.check {
+  color: var(--accent);
+  font-size: var(--fs-12);
+}
 
 @media (max-width: 55.99em) {
-  .trigger { min-width: calc(var(--control-row) - var(--s0)); width: calc(var(--control-row) - var(--s0)); height: calc(var(--control-row) - var(--s0)); padding: 0; justify-content: center; }
-  .current, .chevron { display: none; }
-  .menu { position: fixed; top: calc(var(--s7) + var(--s1)); left: var(--s2); right: var(--s2); width: auto; }
-  .menuScroll { max-height: calc(100dvh - 7rem); }
+  .trigger {
+    min-width: calc(var(--control-row) - var(--s0));
+    width: calc(var(--control-row) - var(--s0));
+    height: calc(var(--control-row) - var(--s0));
+    padding: 0;
+    justify-content: center;
+  }
+  .current,
+  .chevron {
+    display: none;
+  }
+  .menu {
+    position: fixed;
+    top: calc(var(--s7) + var(--s1));
+    left: var(--s2);
+    right: var(--s2);
+    width: auto;
+  }
+  .menuScroll {
+    max-height: calc(100dvh - 7rem);
+  }
 }

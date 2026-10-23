@@ -20,9 +20,8 @@
 .sparkle {
   position: absolute;
   opacity: var(--tw-base);
-  animation: twinkle calc(var(--motion-ambient) * var(--tw-scale))
-    var(--ease-entering) calc(var(--motion-ambient) * var(--tw-delay) * -1)
-    infinite alternate;
+  animation: twinkle calc(var(--motion-ambient) * var(--tw-scale)) var(--ease-entering)
+    calc(var(--motion-ambient) * var(--tw-delay) * -1) infinite alternate;
 }
 
 .dot {
@@ -43,8 +42,12 @@
 }
 
 @keyframes twinkle {
-  from { opacity: calc(var(--tw-base) * 0.18); }
-  to { opacity: var(--tw-base); }
+  from {
+    opacity: calc(var(--tw-base) * 0.18);
+  }
+  to {
+    opacity: var(--tw-base);
+  }
 }
 
 /* 별똥별 — 한참에 한 번 지나간다.
@@ -67,15 +70,30 @@
 }
 
 @keyframes shoot {
-  0% { opacity: 0; transform: translate3d(-6rem, -2rem, 0) rotate(18deg) scaleX(0.2); }
-  2% { opacity: var(--sky-star); }
-  6% { opacity: 0; transform: translate3d(14rem, 4.5rem, 0) rotate(18deg) scaleX(1); }
-  100% { opacity: 0; transform: translate3d(14rem, 4.5rem, 0) rotate(18deg) scaleX(1); }
+  0% {
+    opacity: 0;
+    transform: translate3d(-6rem, -2rem, 0) rotate(18deg) scaleX(0.2);
+  }
+  2% {
+    opacity: var(--sky-star);
+  }
+  6% {
+    opacity: 0;
+    transform: translate3d(14rem, 4.5rem, 0) rotate(18deg) scaleX(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(14rem, 4.5rem, 0) rotate(18deg) scaleX(1);
+  }
 }
 
 /* 전역 규칙은 시간을 0으로 줄일 뿐이라 무한 반복은 깜빡임이 된다 — 여기서 멈춘다. */
 @media (prefers-reduced-motion: reduce) {
   .dot,
-  .sparkle { animation: none; }
-  .shooting { display: none; }
+  .sparkle {
+    animation: none;
+  }
+  .shooting {
+    display: none;
+  }
 }

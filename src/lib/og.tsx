@@ -37,8 +37,18 @@ function fontFile(name: string): Buffer {
 /** 굵기는 **가진 것만** 부른다 — 없는 굵기는 satori 가 이웃 칸으로 스냅한다. */
 function fonts() {
   return [
-    { name: "Pretendard", data: fontFile("Pretendard-Regular.otf"), weight: 400 as const, style: "normal" as const },
-    { name: "Pretendard", data: fontFile("Pretendard-Bold.otf"), weight: 700 as const, style: "normal" as const },
+    {
+      name: "Pretendard",
+      data: fontFile("Pretendard-Regular.otf"),
+      weight: 400 as const,
+      style: "normal" as const,
+    },
+    {
+      name: "Pretendard",
+      data: fontFile("Pretendard-Bold.otf"),
+      weight: 700 as const,
+      style: "normal" as const,
+    },
   ];
 }
 
@@ -111,9 +121,41 @@ export function ogCard({ eyebrow, title, lead, domain }: OgCard) {
           color: INK.text,
         }}
       >
-        <div style={{ position: "absolute", right: 86, top: 76, width: 250, height: 250, border: "1px solid rgba(183,154,255,0.18)", borderRadius: 999, boxShadow: "0 0 90px rgba(133,80,228,0.18)" }} />
-        <div style={{ position: "absolute", right: 148, top: 138, width: 126, height: 126, border: "1px solid rgba(183,154,255,0.28)", borderRadius: 999 }} />
-        <div style={{ position: "absolute", right: 202, top: 192, width: 18, height: 18, background: INK.accent, borderRadius: 999, boxShadow: "0 0 34px rgba(183,154,255,0.88)" }} />
+        <div
+          style={{
+            position: "absolute",
+            right: 86,
+            top: 76,
+            width: 250,
+            height: 250,
+            border: "1px solid rgba(183,154,255,0.18)",
+            borderRadius: 999,
+            boxShadow: "0 0 90px rgba(133,80,228,0.18)",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            right: 148,
+            top: 138,
+            width: 126,
+            height: 126,
+            border: "1px solid rgba(183,154,255,0.28)",
+            borderRadius: 999,
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            right: 202,
+            top: 192,
+            width: 18,
+            height: 18,
+            background: INK.accent,
+            borderRadius: 999,
+            boxShadow: "0 0 34px rgba(183,154,255,0.88)",
+          }}
+        />
         {/* 머리 — 심볼 없이 이름 자체가 브랜드가 된다. */}
         <div style={{ display: "flex", alignItems: "center" }}>
           <span
@@ -154,7 +196,15 @@ export function ogCard({ eyebrow, title, lead, domain }: OgCard) {
             {title}
           </span>
           {lead ? (
-            <span style={{ fontSize: 32, fontWeight: 400, lineHeight: 1.45, color: INK.sub, lineClamp: 2 }}>
+            <span
+              style={{
+                fontSize: 32,
+                fontWeight: 400,
+                lineHeight: 1.45,
+                color: INK.sub,
+                lineClamp: 2,
+              }}
+            >
               {lead}
             </span>
           ) : null}

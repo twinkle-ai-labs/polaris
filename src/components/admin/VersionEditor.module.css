@@ -1,10 +1,27 @@
-.form { display: flex; flex-direction: column; gap: var(--s2); }
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+}
 
-.meta { display: grid; gap: var(--s2); grid-template-columns: 1fr; }
+.meta {
+  display: grid;
+  gap: var(--s2);
+  grid-template-columns: 1fr;
+}
 
-.field { display: flex; flex-direction: column; gap: var(--s0); min-width: 0; }
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s0);
+  min-width: 0;
+}
 
-.label { font-size: 0.75rem; font-weight: 600; color: var(--text-sub); }
+.label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-sub);
+}
 
 .input {
   width: 100%;
@@ -15,11 +32,23 @@
   color: var(--text);
   font-size: 0.875rem;
 }
-.input:focus { border-color: var(--accent); outline: none; box-shadow: var(--focus-ring); }
+.input:focus {
+  border-color: var(--accent);
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
 
-.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.8125rem; }
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.8125rem;
+}
 
-.paneBar { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); }
+.paneBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s2);
+}
 
 .segment {
   display: inline-flex;
@@ -37,14 +66,27 @@
   font-size: 0.8125rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background var(--motion-fast) var(--ease-entering),
+  transition:
+    background var(--motion-fast) var(--ease-entering),
     color var(--motion-fast) var(--ease-entering);
 }
-.segOn { background: var(--surface); color: var(--accent); box-shadow: var(--shadow-card); }
+.segOn {
+  background: var(--surface);
+  color: var(--accent);
+  box-shadow: var(--shadow-card);
+}
 
-.count { font-size: 0.75rem; color: var(--text-faint); font-variant-numeric: tabular-nums; }
+.count {
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+}
 
-.panes { display: grid; gap: var(--s2); grid-template-columns: 1fr; }
+.panes {
+  display: grid;
+  gap: var(--s2);
+  grid-template-columns: 1fr;
+}
 
 .textarea {
   width: 100%;
@@ -59,7 +101,11 @@
   line-height: 1.8;
   resize: vertical;
 }
-.textarea:focus { border-color: var(--accent); outline: none; box-shadow: var(--focus-ring); }
+.textarea:focus {
+  border-color: var(--accent);
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
 
 .preview {
   min-height: 26rem;
@@ -71,10 +117,18 @@
 }
 
 /* 좁은 화면에서는 한 번에 하나만 — 둘을 나란히 두면 둘 다 못 읽는다. */
-.panes[data-pane="write"] .preview { display: none; }
-.panes[data-pane="read"] .textarea { display: none; }
+.panes[data-pane="write"] .preview {
+  display: none;
+}
+.panes[data-pane="read"] .textarea {
+  display: none;
+}
 
-.actions { display: flex; align-items: center; gap: var(--s1h); }
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--s1h);
+}
 
 .save {
   padding: 0.625rem 1.5rem;
@@ -87,18 +141,33 @@
   cursor: pointer;
   transition: filter var(--motion-fast) var(--ease-entering);
 }
-.save:hover { filter: brightness(1.06); }
+.save:hover {
+  filter: brightness(1.06);
+}
 
-.saved { font-size: 0.75rem; font-weight: 600; color: var(--success); }
+.saved {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--success);
+}
 
 @media (min-width: 40em) {
-  .meta { grid-template-columns: 2fr 1.4fr 1fr; align-items: end; }
+  .meta {
+    grid-template-columns: 2fr 1.4fr 1fr;
+    align-items: end;
+  }
 }
 
 /* 넓으면 쓰기와 미리보기를 나란히 둔다 — 고르개는 그때 숨는다. */
 @media (min-width: 64em) {
-  .panes { grid-template-columns: 1fr 1fr; }
+  .panes {
+    grid-template-columns: 1fr 1fr;
+  }
   .panes[data-pane="write"] .preview,
-  .panes[data-pane="read"] .textarea { display: block; }
-  .segment { display: none; }
+  .panes[data-pane="read"] .textarea {
+    display: block;
+  }
+  .segment {
+    display: none;
+  }
 }

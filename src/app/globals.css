@@ -2,7 +2,11 @@
 
 /* ── 바탕 ───────────────────────────────────────────────────── */
 
-*, *::before, *::after { box-sizing: border-box; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 html {
   -webkit-text-size-adjust: 100%;
@@ -14,14 +18,23 @@ html {
 }
 
 /* WebKit 은 제 것을 따로 본다 — 스크롤되는 곳이면 어디든. */
-::-webkit-scrollbar { width: 0.5rem; height: 0.5rem; }
-::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
 ::-webkit-scrollbar-thumb {
   background: var(--scrollbar-thumb);
   border-radius: 999px;
 }
-::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover); }
-::-webkit-scrollbar-corner { background: transparent; }
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
 
 body {
   margin: 0;
@@ -34,8 +47,14 @@ body {
   flex-direction: column;
   background: var(--bg);
   color: var(--text);
-  font-family: Pretendard, Pretendard Variable, -apple-system, BlinkMacSystemFont,
-    "Apple SD Gothic Neo", system-ui, sans-serif;
+  font-family:
+    Pretendard,
+    Pretendard Variable,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Apple SD Gothic Neo",
+    system-ui,
+    sans-serif;
   font-size: var(--fs-16);
   font-weight: var(--fw-regular);
   line-height: 1.6;
@@ -51,18 +70,31 @@ body {
   overflow-wrap: break-word;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   margin: 0;
   line-height: 1.3;
   letter-spacing: -0.02em;
   font-weight: var(--fw-bold);
   text-wrap: balance;
 }
-p { margin: 0; }
-a { color: var(--accent); text-decoration: none; }
-a:hover { text-decoration: underline; }
+p {
+  margin: 0;
+}
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
 
-button, input, textarea, select {
+button,
+input,
+textarea,
+select {
   font: inherit;
   color: inherit;
 }
@@ -74,12 +106,30 @@ button, input, textarea, select {
   border-radius: var(--radius-sm);
 }
 
-::selection { background: var(--primary-soft); color: var(--text); }
+::selection {
+  background: var(--primary-soft);
+  color: var(--text);
+}
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* 홈과 공유하는 사이트 레이아웃. 문서의 본문 폭은 각 페이지에서 유지한다. */
+:root {
+  --site-content-width: 68rem;
+  --site-page-gutter: 1.5rem;
+}
+@media (max-width: 520px) {
+  :root {
+    --site-page-gutter: 1.25rem;
   }
 }

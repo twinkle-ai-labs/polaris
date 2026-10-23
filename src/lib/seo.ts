@@ -76,7 +76,11 @@ export function appAlternates(locale: string, app: string): NonNullable<Metadata
  *
  * 안 펴낸 언어를 hreflang 에 올리면 검색 엔진을 404 로 안내하는 일이다.
  */
-export function docAlternates(locale: string, app: string, doc: string): NonNullable<Metadata["alternates"]> {
+export function docAlternates(
+  locale: string,
+  app: string,
+  doc: string,
+): NonNullable<Metadata["alternates"]> {
   const published = publishedLocales(app, doc);
   const languages: Record<string, string> = {};
   for (const l of published) languages[l] = docPath(l, app, doc);
@@ -119,7 +123,12 @@ export const SITE_OG_IMAGE = "/og.png";
  * 한자를 쓰는 언어는 실은 글꼴이 그리지 못해 카드를 굽지 않는다(`lib/og` 의 `isDrawable`).
  * 그 언어의 장은 굽지도 않은 그림을 가리키면 안 되므로 보관소의 기본 카드로 물러선다.
  */
-export function docOgImage(locale: string, app: string, doc: string, ...words: (string | undefined)[]): string {
+export function docOgImage(
+  locale: string,
+  app: string,
+  doc: string,
+  ...words: (string | undefined)[]
+): string {
   return isDrawable(...words) ? `${docPath(locale, app, doc)}og.png` : SITE_OG_IMAGE;
 }
 

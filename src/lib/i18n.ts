@@ -40,6 +40,7 @@ export type Strings = {
   openMenu: string;
   closeMenu: string;
   navHome: string;
+  navApps: string;
   navDesign: string;
   navBlog: string;
   navTerms: string;
@@ -70,13 +71,15 @@ const ko: Strings = {
   notFoundTitle: "요청하신 약관 문서를 찾을 수 없습니다",
   notFoundBody: "주소가 올바른지 확인하시거나, 아래 버튼을 통해 전체 앱 목록으로 이동해 주세요.",
   notFoundCta: "전체 앱 보기",
-  homeLead: "Twinkle AI Labs가 제공하는 모든 앱의 이용약관 및 개인정보 처리방침을 한 곳에서 투명하고 안전하게 제공합니다.",
+  homeLead:
+    "Twinkle AI Labs가 제공하는 모든 앱의 이용약관 및 개인정보 처리방침을 한 곳에서 투명하고 안전하게 제공합니다.",
   blankTitle: "등록된 앱 약관이 없습니다",
   blankBody: "새로운 앱 및 정책 문서가 추가되면 이곳에 표시됩니다.",
   mainNav: "주요 메뉴",
   openMenu: "메뉴 열기",
   closeMenu: "메뉴 닫기",
   navHome: "홈",
+  navApps: "앱",
   navDesign: "디자인 시스템",
   navBlog: "블로그",
   navTerms: "약관",
@@ -113,13 +116,15 @@ const en: Strings = {
   notFoundTitle: "Document Not Found",
   notFoundBody: "Please check the web address or return home to select an app.",
   notFoundCta: "See All Apps",
-  homeLead: "Centralized terms of service and privacy policies for all Twinkle AI Labs applications.",
+  homeLead:
+    "Centralized terms of service and privacy policies for all Twinkle AI Labs applications.",
   blankTitle: "No Apps Registered Yet",
   blankBody: "Newly added apps and policy documents will appear here.",
   mainNav: "Main navigation",
   openMenu: "Open menu",
   closeMenu: "Close menu",
   navHome: "Home",
+  navApps: "Apps",
   navDesign: "Design",
   navBlog: "Blog",
   navTerms: "Terms",
@@ -163,6 +168,7 @@ const ja: Strings = {
   openMenu: "メニューを開く",
   closeMenu: "メニューを閉じる",
   navHome: "ホーム",
+  navApps: "アプリ",
   navDesign: "デザイン",
   navBlog: "ブログ",
   navTerms: "規約",
@@ -206,6 +212,7 @@ const zhCN: Strings = {
   openMenu: "打开菜单",
   closeMenu: "关闭菜单",
   navHome: "主页",
+  navApps: "应用",
   navDesign: "设计",
   navBlog: "博客",
   navTerms: "条款",
@@ -249,6 +256,7 @@ const zhTW: Strings = {
   openMenu: "開啟選單",
   closeMenu: "關閉選單",
   navHome: "首頁",
+  navApps: "應用程式",
   navDesign: "設計",
   navBlog: "部落格",
   navTerms: "條款",
@@ -292,6 +300,7 @@ const es: Strings = {
   openMenu: "Abrir menú",
   closeMenu: "Cerrar menú",
   navHome: "Home",
+  navApps: "Apps",
   navDesign: "Diseño",
   navBlog: "Blog",
   navTerms: "Términos",
@@ -335,6 +344,7 @@ const de: Strings = {
   openMenu: "Menü öffnen",
   closeMenu: "Menü schließen",
   navHome: "Home",
+  navApps: "Apps",
   navDesign: "Design",
   navBlog: "Blog",
   navTerms: "Bedingungen",
@@ -378,6 +388,7 @@ const fr: Strings = {
   openMenu: "Ouvrir le menu",
   closeMenu: "Fermer le menu",
   navHome: "Accueil",
+  navApps: "Applications",
   navDesign: "Design",
   navBlog: "Blog",
   navTerms: "Conditions",
@@ -389,7 +400,6 @@ const fr: Strings = {
     custom: "Document",
   },
 };
-
 
 const it: Strings = {
   archive: "Termini e informative",
@@ -422,6 +432,7 @@ const it: Strings = {
   openMenu: "Apri menu",
   closeMenu: "Chiudi menu",
   navHome: "Home",
+  navApps: "App",
   navDesign: "Design",
   navBlog: "Blog",
   navTerms: "Termini",
@@ -465,6 +476,7 @@ const ptBR: Strings = {
   openMenu: "Abrir menu",
   closeMenu: "Fechar menu",
   navHome: "Home",
+  navApps: "Apps",
   navDesign: "Design",
   navBlog: "Blog",
   navTerms: "Termos",
@@ -508,6 +520,7 @@ const id: Strings = {
   openMenu: "Buka menu",
   closeMenu: "Tutup menu",
   navHome: "Beranda",
+  navApps: "Aplikasi",
   navDesign: "Desain",
   navBlog: "Blog",
   navTerms: "Ketentuan",
@@ -529,7 +542,14 @@ const id: Strings = {
  * `zh` 하나만 오는 경우를 위해 별칭을 남겨 둔다.
  */
 const TABLE: Record<string, Strings> = {
-  ko, en, ja, es, de, fr, it, id,
+  ko,
+  en,
+  ja,
+  es,
+  de,
+  fr,
+  it,
+  id,
   "zh-CN": zhCN,
   "zh-TW": zhTW,
   "pt-BR": ptBR,

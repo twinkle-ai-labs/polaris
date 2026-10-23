@@ -19,24 +19,48 @@ export default function HomeBody({ locale }: { locale: string }) {
         {/* 하늘은 첫 화면의 것이다 — 이름이 서는 가운데 기둥만 비워 둔다. */}
         <Starfield
           height="100%"
-          dots={92}
-          sparkles={10}
-          shooting={2}
+          dots={28}
+          sparkles={4}
+          shooting={0}
           keepout={{ x: [22, 78], y: [4, 58] }}
         />
-        <div className={styles.intro}>
-          <span className={styles.heroMark}>
-            <StarMark gradientId="polaris-hero" />
-          </span>
-          <p className={styles.eyebrow}>{site.name}</p>
-          <h1 className={styles.title}>{t.heroTitle}</h1>
-          <p className={styles.define}>{t.heroDefine}</p>
-          {/* 운영자가 제 말로 적어 둔 한 줄이 있으면 그것이 먼저다. */}
-          <p className={styles.lead}>{site.tagline || t.homeLead}</p>
-          <div className={styles.actions}>
-            <a className={styles.cta} href="#apps">
-              {t.allApps}
-            </a>
+        <div className={styles.heroGrid}>
+          <div className={styles.intro}>
+            <p className={styles.eyebrow}>{site.name}</p>
+            <h1 className={styles.title}>{t.heroDefine}</h1>
+            {/* 운영자가 제 말로 적어 둔 한 줄이 있으면 그것이 먼저다. */}
+            <p className={styles.lead}>{site.tagline || t.homeLead}</p>
+            <div className={styles.actions}>
+              <a className={styles.cta} href="#apps">
+                {t.allApps}
+                <span aria-hidden="true">↓</span>
+              </a>
+            </div>
+          </div>
+          <div className={styles.documentScene} aria-hidden="true">
+            <div className={styles.orbit} />
+            <div className={styles.paperBack} />
+            <div className={styles.paper}>
+              <div className={styles.paperTop}>
+                <StarMark gradientId="polaris-paper" />
+                <span>POLARIS</span>
+              </div>
+              <span className={styles.paperTitle}>{t.kinds.privacy}</span>
+              <div className={styles.paperLines}>
+                <i />
+                <i />
+                <i />
+              </div>
+              <span className={styles.paperSubtitle}>{t.kinds.terms}</span>
+              <div className={styles.paperLines}>
+                <i />
+                <i />
+              </div>
+              <div className={styles.paperSeal}>
+                <StarMark gradientId="polaris-seal" />
+              </div>
+            </div>
+            <span className={styles.sceneNote}>Twinkle AI Labs</span>
           </div>
         </div>
       </div>
@@ -73,6 +97,7 @@ export default function HomeBody({ locale }: { locale: string }) {
                   ) : null}
                   <span className={styles.cardMeta}>
                     <span className={styles.count}>{t.docCount(app.docCount)}</span>
+                    <span aria-hidden="true">→</span>
                   </span>
                 </Link>
               </li>

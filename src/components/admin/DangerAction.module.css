@@ -8,7 +8,9 @@
   font-weight: 600;
   cursor: pointer;
 }
-.trigger:hover { background: color-mix(in srgb, var(--danger) 12%, transparent); }
+.trigger:hover {
+  background: color-mix(in srgb, var(--danger) 12%, transparent);
+}
 
 .veil {
   position: fixed;
@@ -32,15 +34,37 @@
   animation: rise var(--motion-base) var(--ease-entering);
 }
 
-@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 @keyframes rise {
-  from { opacity: 0; transform: translateY(0.75rem); }
-  to { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
-.question { font-size: 1rem; font-weight: 700; letter-spacing: -0.01em; }
+.question {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
 
-.detail { margin-top: var(--s1); color: var(--text-sub); font-size: 0.8125rem; line-height: 1.7; }
+.detail {
+  margin-top: var(--s1);
+  color: var(--text-sub);
+  font-size: 0.8125rem;
+  line-height: 1.7;
+}
 
 .row {
   margin-top: var(--s3);

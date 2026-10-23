@@ -92,7 +92,9 @@ export default function HeaderNavigation({
         className={`${styles.nav} ${isOpen ? styles.navOpen : ""}`}
         aria-label={label}
       >
-        <span className={styles.navHeading} aria-hidden="true">{label}</span>
+        <span className={styles.navHeading} aria-hidden="true">
+          {label}
+        </span>
         {links.map((link) => {
           const isCurrent = link.key === CURRENT_NAV_KEY;
           const className = `${styles.navLink} ${isCurrent ? styles.navLinkActive : ""}`;
@@ -124,7 +126,11 @@ export default function HeaderNavigation({
           aria-controls="site-navigation"
           onClick={() => dispatch(navigationMenuToggled())}
         >
-          <span className={styles.menuIcon} aria-hidden="true"><span /><span /><span /></span>
+          <span className={styles.menuIcon} aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </span>
         </button>
       </div>
     </div>

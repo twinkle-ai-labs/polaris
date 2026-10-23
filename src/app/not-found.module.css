@@ -13,9 +13,17 @@
   margin-bottom: var(--s1);
 }
 
-.title { font-size: 1.375rem; font-weight: 800; letter-spacing: -0.02em; }
+.title {
+  font-size: 1.375rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
 
-.body { margin-top: var(--s1h); color: var(--text-sub); font-size: 0.9375rem; }
+.body {
+  margin-top: var(--s1h);
+  color: var(--text-sub);
+  font-size: 0.9375rem;
+}
 
 /* 다음 한 걸음을 가리키는 면이라 그라데이션이 여기 온다. */
 .cta {
@@ -29,4 +37,6 @@
   font-weight: 700;
   box-shadow: var(--shadow-brand);
 }
-.cta:hover { text-decoration: none; }
+.cta:hover {
+  text-decoration: none;
+}

@@ -1,37 +1,55 @@
 /* 같은 섹션의 문단은 가깝게, 섹션 경계는 여백으로 구별한다. */
 .prose {
-  font-size: 0.9375rem;
-  line-height: 1.65;
   color: var(--text);
   overflow-wrap: break-word;
 }
 
-.prose > :first-child { margin-top: 0; }
-.prose > :last-child { margin-bottom: 0; }
+.prose > :first-child {
+  margin-top: 0;
+}
+.prose > :last-child {
+  margin-bottom: 0;
+}
 
-.prose h1, .prose h2, .prose h3, .prose h4 {
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
   margin: var(--s4) 0 var(--s1h);
-  font-weight: 700;
   letter-spacing: -0.02em;
 }
-.prose h1 { font-size: 1.375rem; }
-.prose h2 {
-  font-size: 1.125rem;
-  margin-top: var(--s4);
-  padding-top: 0;
+.prose h1 {
+  font-size: 1.375rem;
 }
-.prose h3 { font-size: 1rem; }
-.prose h4 { font-size: 0.9375rem; color: var(--text-sub); }
+.prose h3 {
+  font-size: 1rem;
+}
+.prose h4 {
+  font-size: 0.9375rem;
+  color: var(--text-sub);
+}
 
-.prose p { margin: 0 0 var(--s1h); }
+.prose p {
+  margin: 0 0 var(--s1h);
+}
 
-.prose ul, .prose ol { margin: 0 0 var(--s1h); padding-left: 1.25rem; }
-.prose li { margin-bottom: var(--s0); }
-.prose li::marker { color: var(--text-faint); }
+.prose ul,
+.prose ol {
+  margin: 0 0 var(--s1h);
+  padding-left: 1.25rem;
+}
+.prose li {
+  margin-bottom: var(--s0);
+}
+.prose li::marker {
+  color: var(--text-faint);
+}
 
-.prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 0.125rem; }
-
-.prose strong { font-weight: 700; }
+.prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.125rem;
+}
 
 .prose hr {
   border: 0;
@@ -61,7 +79,10 @@
   overflow-x: auto;
   margin: 0 0 var(--s2);
 }
-.prose pre code { background: none; padding: 0; }
+.prose pre code {
+  background: none;
+  padding: 0;
+}
 
 /* 넓은 표는 제 안에서 구른다 — 페이지가 옆으로 밀리지 않는다. */
 .prose table {
@@ -72,10 +93,56 @@
   margin: 0 0 var(--s2);
   font-size: 0.875rem;
 }
-.prose th, .prose td {
+.prose th,
+.prose td {
   border-bottom: 1px solid var(--divider);
   padding: var(--s1) var(--s1h);
   text-align: left;
   vertical-align: top;
 }
-.prose th { color: var(--text-sub); font-weight: 700; white-space: nowrap; }
+.prose th {
+  color: var(--text-sub);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.prose {
+  font-size: 1rem;
+  line-height: 1.9;
+  letter-spacing: -0.01em;
+}
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  font-weight: 600;
+  line-height: 1.5;
+  scroll-margin-top: 6rem;
+}
+.prose h2 {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--divider);
+  font-size: 1.3rem;
+  letter-spacing: -0.035em;
+}
+.prose > h2:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+.prose p {
+  margin-bottom: 1.25rem;
+}
+.prose strong {
+  font-weight: 600;
+}
+@media (max-width: 520px) {
+  .prose {
+    font-size: 0.9375rem;
+    line-height: 1.9;
+  }
+  .prose h2 {
+    font-size: 1.15rem;
+    margin-top: 2.5rem;
+  }
+}

@@ -2,7 +2,11 @@ import { createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
 import { applyTheme, writeStoredTheme } from "@/lib/theme";
 import { localeAdopted, selectLocale } from "./localeSlice";
 import { localeMenuClosed, localeMenuToggled, selectIsLocaleMenuOpen } from "./localeMenuSlice";
-import { navigationMenuClosed, navigationMenuToggled, selectIsNavigationMenuOpen } from "./navigationMenuSlice";
+import {
+  navigationMenuClosed,
+  navigationMenuToggled,
+  selectIsNavigationMenuOpen,
+} from "./navigationMenuSlice";
 import { selectTheme, themeAdopted, themeToggled } from "./themeSlice";
 import type { AppDispatch, RootState } from "./index";
 
