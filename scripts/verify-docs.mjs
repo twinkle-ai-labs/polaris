@@ -34,7 +34,9 @@ const APPS = join(CONTENT, "apps");
 
 const REQUIRED_EVERYWHERE = {
   "수집하는 항목": ["광고 ID", "Werbe-ID", "Identificador de publicidad", "Identifiant publicitaire",
-    "ID pubblicità", "ID de publicidade", "広告 ID", "广告 ID", "廣告 ID", "ID iklan", "Advertising ID", "advertising ID"],
+    "ID pubblicità", "ID de publicidade", "広告 ID", "广告 ID", "廣告 ID", "ID iklan", "Advertising ID",
+    // Android 스페인어 설정이 부르는 이름 (2026-10-27, APK 추출기)
+    "ID de publicidad"],
   "제3자 처리자": ["AdMob"],
   "연락처": ["twinkle.ai.labs@gmail.com"],
 };
@@ -223,6 +225,8 @@ for (const app of readdirSync(APPS)) {
          */
         const allow = new Set(["Twinkle", "AI", "Labs", "Google", "AdMob", "Play", "IP", "ID", "OS",
           "PDF", "OCR", "Android", "Pocket", "pocket", "pdf", "Polaris",
+          // APK 추출기 (2026-10-27) — 파일 형식(APK · .apks · zip), 저장 폴더 이름(APK Extractor), 권한 이름(QUERY_ALL_PACKAGES)
+          "APK", "apk", "apks", "zip", "Extractor", "extractor", "QUERY", "ALL", "PACKAGES",
           "twinkle", "ai", "labs", "gmail", "com", "policies", "google", "privacy", "https", "stock", "calculator",
           // 안쪽 링크의 첫 칸 — 그 문서의 언어 코드(`/ja/…` · `/zh-CN/…`)
           "ja", "zh", "CN", "TW"]);
@@ -358,7 +362,9 @@ for (const app of readdirSync(APPS)) {
           fail(`${where}: 관할 대장에 없다 — 무슨 법을 따르는지 정하지 않았다`);
         } else {
           for (const [topic, kws] of Object.entries(REQUIRED_EVERYWHERE))
-            if (!kws.some((k) => body.includes(k))) fail(`${where}: «${topic}» 가 문서에서 안 보인다`);
+            // 대소문자는 가리지 않는다 — 문장 가운데의 «identifiant publicitaire» 도 같은 항목이다 (2026-10-27).
+            // ↩ 대장이 «Identifiant publicitaire» 로만 적혀 있어 문장 첫머리에 올 때만 세어졌다
+            if (!kws.some((k) => body.toLowerCase().includes(k.toLowerCase()))) fail(`${where}: «${topic}» 가 문서에서 안 보인다`);
           // 공지 기간(30일)과 조문 번호는 연령이 아니다. 아동 조항 본문에서만 센다.
           const childHeading = /아동|children|Kinder|menores|enfants|minori|crianças|anak|子ども|子供|児童|儿童|兒童/i;
           const childText = body.split(/^##\s+/m)
