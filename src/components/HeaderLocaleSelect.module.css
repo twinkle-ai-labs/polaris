@@ -61,7 +61,11 @@
 .menu {
   position: absolute;
   top: calc(100% + var(--s1));
-  right: 0;
+  /* 고르개가 머리띠 한가운데 서므로 목록도 그 아래 한가운데로 편다 — 목록이 고르개보다 넓어
+     left·right 로는 못 맞추고(과잉 제약이라 오른쪽이 버려진다) 반만큼 되밀어 세운다.
+     `translate` 는 `transform` 과 다른 칸이라 여는 움직임과 부딪치지 않는다. */
+  left: 50%;
+  translate: -50% 0;
   z-index: 40;
   width: 13rem;
   margin: 0;
@@ -73,7 +77,7 @@
   -webkit-backdrop-filter: blur(1.5rem) saturate(150%);
   backdrop-filter: blur(1.5rem) saturate(150%);
   box-shadow: var(--shadow-lift);
-  transform-origin: top right;
+  transform-origin: top center;
   animation: openMenu 220ms cubic-bezier(0.2, 1.35, 0.4, 1) both;
 }
 
@@ -177,6 +181,7 @@
     left: var(--s2);
     right: var(--s2);
     width: auto;
+    translate: none;
   }
   .menuScroll {
     max-height: calc(100dvh - 7rem);

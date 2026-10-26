@@ -45,10 +45,18 @@
   height: 100%;
   margin: 0 auto;
   padding: 0 var(--s2);
+  /* 세 칸 — 양끝은 같은 몫을 나눠 가져 가운데 칸이 화면의 한가운데에 선다. */
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--s2);
+}
+
+/* 가운데 칸 — 언어 고르개 하나. */
+.headerCenter {
+  justify-self: center;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--s2);
 }
 
 .brand {
@@ -77,6 +85,7 @@
 }
 
 .headerControls {
+  justify-self: end;
   display: flex;
   align-items: center;
   gap: var(--s2);
