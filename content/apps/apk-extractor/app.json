@@ -1,9 +1,29 @@
 {
   "name": {
-    "ko": "APK 추출기"
+    "ko": "APK 추출기",
+    "en": "APK Extractor",
+    "ja": "APK抽出",
+    "zh-CN": "APK 提取器",
+    "zh-TW": "APK 擷取器",
+    "es": "Extractor de APK",
+    "de": "APK-Extraktor",
+    "fr": "Extracteur APK",
+    "it": "Estrattore APK",
+    "pt-BR": "Extrator de APK",
+    "id": "Ekstraktor APK"
   },
   "description": {
-    "ko": "기기에 설치된 앱을 설치 파일(APK)로 꺼내 저장하거나 공유하는 앱. 분할 설치된 앱은 .apks 파일 하나로 묶는다."
+    "ko": "기기에 설치된 앱을 설치 파일(APK)로 꺼내 저장하거나 공유하는 앱. 분할 설치된 앱은 .apks 파일 하나로 묶는다.",
+    "en": "Extracts the apps installed on your device as installation files (APKs) so you can save or share them. Apps installed as split APKs are bundled into a single .apks file.",
+    "ja": "端末にインストールされたアプリをインストールファイル（APK）として取り出し、保存・共有するアプリ。分割インストールされたアプリは .apks ファイル1つにまとめる。",
+    "zh-CN": "将设备上已安装的应用提取为安装文件（APK）并保存或分享的应用。拆分安装的应用会打包成一个 .apks 文件。",
+    "zh-TW": "將裝置上已安裝的應用程式擷取為安裝檔（APK）並儲存或分享的應用程式。分割安裝的應用程式會打包成一個 .apks 檔案。",
+    "es": "Una app que extrae las apps instaladas en el dispositivo como archivos de instalación (APK) para guardarlas o compartirlas. Las apps instaladas en varias partes se agrupan en un solo archivo .apks.",
+    "de": "App, die auf dem Gerät installierte Apps als Installationsdateien (APK) extrahiert, um sie zu speichern oder zu teilen. Als Split-APK installierte Apps werden in einer einzigen .apks-Datei zusammengefasst.",
+    "fr": "Extrait les applications installées sur l’appareil sous forme de fichiers d’installation (APK) pour les enregistrer ou les partager. Les applications installées en plusieurs fichiers sont regroupées dans un seul fichier .apks.",
+    "it": "App che estrae le app installate sul dispositivo come file di installazione (APK) per salvarle o condividerle. Le app installate in più parti vengono riunite in un unico file .apks.",
+    "pt-BR": "App que extrai os apps instalados no dispositivo como arquivos de instalação (APK) para salvar ou compartilhar. Apps instalados em partes são reunidos em um único arquivo .apks.",
+    "id": "Aplikasi untuk mengeluarkan aplikasi yang terinstal di perangkat menjadi berkas instalasi (APK) lalu menyimpan atau membagikannya. Aplikasi yang diinstal terpisah digabung menjadi satu berkas .apks."
   },
   "defaultLocale": "ko",
   "homepage": ""
