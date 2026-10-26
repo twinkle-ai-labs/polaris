@@ -37,7 +37,9 @@ export default async function AdminHome({
               <Link href={`/admin/${app.slug}/`} className={styles.row}>
                 <span className={styles.rowMain}>
                   <span className={styles.rowName}>{app.name}</span>
-                  <span className={styles.rowSub}>/{app.defaultLocale}/{app.slug}/</span>
+                  <span className={styles.rowSub}>
+                    /{app.defaultLocale}/{app.slug}/
+                  </span>
                 </span>
                 <span className={styles.rowSide}>
                   <span className={styles.chip}>문서 {app.docs.length}</span>
@@ -125,7 +127,11 @@ export default async function AdminHome({
           <div className={styles.fieldsTwo}>
             <label className={styles.field}>
               <span className={styles.label}>문의 메일</span>
-              <input className={styles.input} name="contactEmail" defaultValue={site.contactEmail} />
+              <input
+                className={styles.input}
+                name="contactEmail"
+                defaultValue={site.contactEmail}
+              />
             </label>
             <div className={styles.field}>
               <span className={styles.label}>화면 기본 언어</span>
@@ -149,8 +155,8 @@ export default async function AdminHome({
               placeholder="Asia/Seoul"
             />
             <span className={styles.hint}>
-              시행일을 어느 시간대의 «오늘»로 셀지 정합니다. 매일 이 시간대의 0시 5분에
-              배포가 스스로 한 번 돕니다.
+              시행일을 어느 시간대의 «오늘»로 셀지 정합니다. 매일 이 시간대의 0시 5분에 배포가
+              스스로 한 번 돕니다.
             </span>
           </label>
           <div className={styles.actions}>

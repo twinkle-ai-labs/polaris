@@ -1,279 +1,396 @@
-/* 첫 화면 — 하늘이 여기 깔린다. isolation 이 그 하늘을 이 판 안에 가둔다. */
 .hero {
   position: relative;
   isolation: isolate;
-  width: 100vw;
-  margin-top: calc(-1 * var(--s5));
-  margin-left: calc(50% - 50vw);
-  margin-bottom: var(--s5);
-  padding: clamp(7rem, 12vw, 11rem) max(var(--s3), calc((100vw - var(--shell-narrow)) / 2)) var(--s8);
+  padding-block: 1.5rem 3.5rem;
+  overflow: clip;
+}
+.heroGrid {
   display: grid;
-  place-items: center;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-
-/* 모바일에서는 스크롤바를 포함한 100vw 대신 main의 실제 너비를 확장한다. */
-@media (max-width: 47.99em) {
-  .hero {
-    width: calc(100% + 2 * var(--s2));
-    margin-left: calc(-1 * var(--s2));
-  }
-}
-
-.intro {
-  max-width: var(--shell-narrow);
-  margin: 0 auto;
-  text-align: center;
-}
-
-/* 첫 화면은 아래에서 떠오르며 맞이한다 — 줄마다 반 박자씩 늦게. */
-.intro > * {
-  animation: riseIn var(--motion-slow) var(--ease-entering) backwards;
-}
-.intro > :nth-child(2) { animation-delay: calc(var(--motion-fast) / 2); }
-.intro > :nth-child(3) { animation-delay: var(--motion-fast); }
-.intro > :nth-child(4) { animation-delay: calc(var(--motion-fast) * 1.5); }
-.intro > :nth-child(5) { animation-delay: calc(var(--motion-fast) * 2); }
-.intro > :nth-child(6) { animation-delay: calc(var(--motion-fast) * 2.5); }
-
-@keyframes riseIn {
-  from { opacity: 0; transform: translateY(0.75rem); }
-}
-
-/* 북극성이 이름 위에 선다 — 이 집의 이름이 별의 이름이라서다. */
-.heroMark {
-  display: block;
-  width: 3.25rem;
-  height: 3.25rem;
-  margin: 0 auto var(--s2h);
-  filter: drop-shadow(0 0 1.25rem color-mix(in srgb, var(--primary) 45%, transparent));
-  animation: breathe calc(var(--motion-ambient) * 1.6) var(--ease-entering)
-    infinite alternate;
-}
-.heroMark svg { display: block; width: 100%; height: 100%; }
-
-@keyframes breathe {
-  from { opacity: 0.75; transform: scale(0.96); }
-  to { opacity: 1; transform: scale(1.04); }
-}
-
-.eyebrow {
-  display: inline-flex;
+  grid-template-columns: 1.1fr 1fr;
   align-items: center;
-  gap: var(--s1);
-  font-size: var(--fs-12);
-  font-weight: var(--fw-bold);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  gap: 3rem;
+  min-height: 490px;
+}
+.intro {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+.eyebrow,
+.sectionKicker {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   color: var(--accent);
-  margin-bottom: var(--s2);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
 }
-/* 작은 눈금 하나 — 이름이 시작되는 자리를 손가락처럼 가리킨다. */
-.eyebrow::before {
+.eyebrow::before,
+.sectionKicker::before {
   content: "";
-  width: 1.5rem;
-  /* px — 헤어라인. 글자를 따라 굵어질 것이 아니다. */
   height: 1px;
+  width: 1.5rem;
   background: currentColor;
-  opacity: 0.5;
+  opacity: 0.6;
+  flex: none;
 }
-
 .title {
-  font-size: var(--fs-40);
-  font-weight: var(--fw-bold);
-  letter-spacing: -0.04em;
-  line-height: 1.08;
+  font-size: clamp(2.5rem, 4.5vw, 3.8rem);
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  line-height: 1.35;
   text-wrap: balance;
 }
-
 .lead {
-  margin-top: var(--s1);
+  max-width: 30rem;
   color: var(--text-sub);
-  font-size: var(--fs-16);
-  line-height: var(--lh-body);
+  font-size: 1rem;
+  line-height: 1.9;
+  margin-top: 1.5rem;
 }
-
-.define {
-  margin-top: var(--s2);
-  color: var(--text);
-  font-size: var(--fs-20);
-  font-weight: var(--fw-semibold);
-  letter-spacing: var(--tr-slight);
-  line-height: var(--lh-body);
-}
-
 .actions {
-  margin-top: var(--s4);
   display: flex;
-  justify-content: center;
+  margin-top: 2rem;
 }
-
 .cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 10rem;
-  padding: var(--s1h) var(--s4);
-  border-radius: var(--radius-pill);
-  background: var(--brand-gradient);
+  gap: 2rem;
+  min-height: 48px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 100px;
+  background: var(--primary);
   color: var(--primary-ink);
-  box-shadow: var(--shadow-brand);
-  font-size: var(--fs-16);
-  font-weight: var(--fw-semibold);
-  transition: transform var(--motion-fast) var(--ease-entering), box-shadow var(--motion-fast) var(--ease-entering);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: transform 0.25s;
 }
-
 .cta:hover {
   text-decoration: none;
-  transform: translateY(-0.125rem);
-  box-shadow: var(--shadow-floating);
+  transform: translateY(-3px);
 }
-
+.documentScene {
+  position: relative;
+  height: 420px;
+  display: grid;
+  place-items: center;
+}
+.documentScene::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse,
+    color-mix(in srgb, var(--accent) 16%, transparent),
+    transparent 65%
+  );
+}
+.orbit {
+  position: absolute;
+  width: 350px;
+  height: 330px;
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+  border-radius: 50%;
+  transform: rotate(-24deg) scaleY(0.8);
+}
+.paper,
+.paperBack {
+  position: absolute;
+  width: 235px;
+  height: 290px;
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--accent) 23%, var(--divider));
+  background: var(--surface);
+}
+.paperBack {
+  transform: rotate(-12deg) translate(-20px, 2px);
+  background: color-mix(in srgb, var(--primary-soft) 80%, var(--surface));
+  opacity: 0.65;
+}
+.paper {
+  transform: rotate(7deg);
+  padding: 1.6rem;
+  background: linear-gradient(
+    140deg,
+    color-mix(in srgb, var(--surface) 88%, var(--accent)),
+    var(--surface) 75%
+  );
+  box-shadow:
+    15px 25px 50px #10082020,
+    inset 1px 1px 0 #ffffff20;
+  transition: transform 0.6s;
+}
+.documentScene:hover .paper {
+  transform: rotate(0) translateY(-5px);
+}
+.paperTop {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.625rem;
+  color: var(--text-sub);
+  letter-spacing: 0.15em;
+}
+.paperTop svg {
+  width: 16px;
+  height: 16px;
+}
+.paperTitle {
+  display: block;
+  margin-top: 1.4rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.4;
+}
+.paperSubtitle {
+  display: block;
+  margin-top: 1.4rem;
+  font-size: 0.75rem;
+  color: var(--text-sub);
+}
+.paperLines {
+  margin-top: 1rem;
+}
+.paperLines i {
+  display: block;
+  height: 3px;
+  background: var(--divider);
+  border-radius: 3px;
+  margin-top: 8px;
+}
+.paperLines i:last-child {
+  width: 62%;
+}
+.paperSeal {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--divider);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+.paperSeal svg {
+  width: 18px;
+  height: 18px;
+}
+.sceneNote {
+  position: absolute;
+  bottom: 12px;
+  right: 10%;
+  color: var(--text-sub);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+}
 .appsSection {
-  padding-bottom: var(--s4);
+  padding-block: 3rem 2rem;
+  border-top: 1px solid var(--divider);
   scroll-margin-top: 6rem;
 }
-
-.sectionHead { margin-bottom: var(--s4); }
-
+.sectionHead {
+  margin-bottom: 2rem;
+}
 .sectionKicker {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--s1);
-  margin-bottom: var(--s1h);
-  color: var(--accent);
-  font-size: var(--fs-12);
-  font-weight: var(--fw-bold);
-  letter-spacing: var(--tr-wide);
-  text-transform: uppercase;
+  margin-bottom: 0.75rem;
 }
-
-.sectionKicker::before {
-  content: "";
-  width: 1.5rem;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.5;
-}
-
 .sectionTitle {
-  color: var(--text);
-  font-size: var(--fs-32);
-  font-weight: var(--fw-bold);
-  letter-spacing: var(--tr-tight);
-  line-height: var(--lh-title);
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 1.5;
 }
-
 .grid {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  gap: var(--s2h);
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
 }
-
+.grid > li {
+  min-width: 0;
+}
 .card {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--s1);
+  align-items: flex-start;
+  gap: 0.7rem;
   height: 100%;
-  padding: var(--s3);
-  background: var(--surface);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-card);
+  padding: 1.75rem;
+  border: 1px solid var(--divider);
+  border-radius: 24px;
+  background:
+    radial-gradient(
+      ellipse at 100% 0%,
+      color-mix(in srgb, var(--accent) 9%, transparent),
+      transparent 65%
+    ),
+    var(--surface);
   color: var(--text);
-  transition: transform var(--motion-base) var(--ease-entering),
-    box-shadow var(--motion-base) var(--ease-entering);
+  transition:
+    transform 0.25s,
+    border-color 0.25s,
+    box-shadow 0.25s;
 }
-
 .card:hover {
   text-decoration: none;
-  transform: translateY(-0.1875rem);
-  box-shadow: var(--shadow-lift);
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--divider));
+  box-shadow: 0 18px 40px #170c2410;
 }
-
-/* 앱의 얼굴. 아이콘도 문장도 같은 자리에 같은 크기로 선다 —
-   둘이 크기가 다르면 목록에서 카드마다 제목 높이가 어긋난다. */
-.icon {
-  width: 3rem;
-  height: 3rem;
-  border-radius: var(--radius-md);
-  margin-bottom: var(--s0);
-  box-shadow: var(--shadow-card);
-}
-
-/* 아이콘이 없을 때 앱의 첫 글자가 문장(紋章)이 된다. */
+.icon,
 .monogram {
-  width: 3rem;
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-md);
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  margin-bottom: 1.2rem;
+}
+.monogram {
+  display: grid;
+  place-items: center;
   background: var(--primary-soft);
   color: var(--accent);
-  font-size: var(--fs-20);
-  font-weight: var(--fw-bold);
-  margin-bottom: var(--s0);
+  font-size: 1.25rem;
 }
-
-.cardName { font-size: var(--fs-20); font-weight: var(--fw-bold); letter-spacing: -0.025em; }
-
-.cardDesc {
-  color: var(--text-sub);
-  font-size: var(--fs-14);
-  line-height: 1.7;
-}
-
-.cardMeta {
-  margin-top: auto;
-  padding-top: var(--s2);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--s0) var(--s1);
-}
-
-.count { font-size: var(--fs-12); color: var(--text-faint); font-weight: var(--fw-semibold); }
-
-/* 카드의 오른쪽 위에서 조용히 기다리는 화살표 — 눌러도 된다는 속삭임. */
 .arrow {
   position: absolute;
-  top: var(--s3);
-  right: var(--s3);
-  color: var(--text-faint);
-  font-size: var(--fs-16);
-  transition: color var(--motion-fast) var(--ease-entering),
-    transform var(--motion-fast) var(--ease-entering);
+  top: 1.75rem;
+  right: 1.75rem;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--divider);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--text-sub);
+  font-size: 0.875rem;
 }
-.card:hover .arrow { color: var(--accent); transform: translate(0.125rem, -0.125rem); }
-
+.cardName {
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+.cardDesc {
+  margin-bottom: 1rem;
+  color: var(--text-sub);
+  font-size: 0.875rem;
+  line-height: 1.85;
+}
+.cardMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--divider);
+  color: var(--accent);
+}
+.count {
+  color: var(--text-sub);
+  font-size: 0.75rem;
+}
 .blank {
-  text-align: center;
-  padding: var(--s6) var(--s2);
+  padding: 3rem 0;
   color: var(--text-sub);
 }
-
-.blankTitle { font-weight: var(--fw-bold); color: var(--text); margin-bottom: var(--s1); }
-.blankBody { font-size: var(--fs-14); }
-.blankBody code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: var(--fs-14);
-  background: var(--sunken);
-  border-radius: var(--radius-sm);
-  padding: 0.125rem 0.375rem;
+.blankTitle {
+  color: var(--text);
+  margin-bottom: 1rem;
 }
-
-@media (min-width: 40em) {
-  .grid { grid-template-columns: repeat(2, 1fr); gap: var(--s3); }
-  .title { font-size: var(--fs-60); }
-  .heroMark { width: 4rem; height: 4rem; }
+.blankBody {
+  font-size: 0.9375rem;
 }
-
-@media (min-width: 64em) {
-  .title { font-size: var(--fs-72); }
+@media (max-width: 900px) {
+  .heroGrid {
+    gap: 1.5rem;
+  }
+  .paper,
+  .paperBack {
+    width: 205px;
+    height: 275px;
+  }
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
-@media (min-width: 64em) { .grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 700px) {
+  .hero {
+    padding-top: 0.5rem;
+    padding-bottom: 1.5rem;
+  }
+  .heroGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+  .title {
+    max-width: 30rem;
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+  .lead {
+    font-size: 0.9375rem;
+  }
+  .documentScene {
+    height: 330px;
+    max-width: 360px;
+    width: 100%;
+    margin-inline: auto;
+  }
+  .sceneNote {
+    bottom: 0;
+  }
+  .orbit {
+    width: 280px;
+    height: 280px;
+  }
+  .paper,
+  .paperBack {
+    width: 200px;
+    height: 250px;
+  }
+  .paper {
+    padding: 1.3rem;
+  }
+  .paperTitle {
+    font-size: 1rem;
+  }
+  .paperSubtitle {
+    margin-top: 1rem;
+  }
+  .paperSeal {
+    bottom: 14px;
+    right: 14px;
+  }
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .card {
+    padding: 1.5rem;
+  }
+  .appsSection {
+    padding-top: 2.5rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .paper,
+  .card,
+  .cta {
+    transition: none;
+  }
+  .card:hover,
+  .cta:hover {
+    transform: none;
+  }
+  .documentScene:hover .paper {
+    transform: rotate(7deg);
+  }
+}

@@ -37,8 +37,7 @@ export function readStoredTheme(): Theme | null {
 /** 사용자가 **고른** 것만 남긴다 — 기기의 취향을 베껴 적으면 취향이 바뀌어도 따라가지 못한다. */
 export function writeStoredTheme(theme: Theme): void {
   const domain = cookieDomain(window.location.hostname);
-  document.cookie =
-    `${COOKIE_NAME}=${theme}${domain}; path=/; max-age=${COOKIE_MAX_AGE_SECONDS}; SameSite=Lax`;
+  document.cookie = `${COOKIE_NAME}=${theme}${domain}; path=/; max-age=${COOKIE_MAX_AGE_SECONDS}; SameSite=Lax`;
 }
 
 /** 화면에 입힌다. CSS 는 `[data-theme]` 하나만 보므로 여기가 유일한 붓이다. */

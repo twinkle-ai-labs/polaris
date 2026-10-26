@@ -33,7 +33,12 @@ export default function SiteHeader({
           <StarMark gradientId="twinkle-brand" className={styles.star} />
           <span className={styles.brandName}>{site.operator || site.name}</span>
         </a>
-        <HeaderNavigation links={links} label={t.mainNav} openLabel={t.openMenu} closeLabel={t.closeMenu}>
+        <HeaderNavigation
+          links={links}
+          label={t.mainNav}
+          openLabel={t.openMenu}
+          closeLabel={t.closeMenu}
+        >
           <HeaderLocaleSelect
             locales={LOCALES}
             current={locale}

@@ -149,11 +149,17 @@ export default function HeaderLocaleSelect({
             onKeyDown={(event) => {
               if (!["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) return;
               event.preventDefault();
-              const options = Array.from(event.currentTarget.querySelectorAll<HTMLButtonElement>("[role='option']"));
+              const options = Array.from(
+                event.currentTarget.querySelectorAll<HTMLButtonElement>("[role='option']"),
+              );
               const currentIndex = options.indexOf(document.activeElement as HTMLButtonElement);
-              const index = event.key === "Home" ? 0
-                : event.key === "End" ? options.length - 1
-                : (currentIndex + (event.key === "ArrowDown" ? 1 : -1) + options.length) % options.length;
+              const index =
+                event.key === "Home"
+                  ? 0
+                  : event.key === "End"
+                    ? options.length - 1
+                    : (currentIndex + (event.key === "ArrowDown" ? 1 : -1) + options.length) %
+                      options.length;
               options[index]?.focus();
             }}
           >

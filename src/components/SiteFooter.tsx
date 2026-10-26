@@ -1,13 +1,9 @@
 import Link from "next/link";
 import StarMark from "@/components/StarMark";
-import Starfield from "@/components/Starfield";
-import type { Site } from "@/lib/content.mjs";
+import { listApps, type Site } from "@/lib/content.mjs";
 import type { Strings } from "@/lib/i18n";
-import { navLinks } from "@/lib/site";
-import styles from "@/app/layout.module.css";
-
-/** 바닥에도 하늘 한 자락 — 첫 화면과 마지막 화면이 같은 말로 끝난다. */
-const FOOTER_SKY_SEED = 19910104;
+import { HOME_URL, appPath, navLinks } from "@/lib/site";
+import s from "./SiteFooter.module.css";
 
 export default function SiteFooter({
   site,
@@ -19,57 +15,78 @@ export default function SiteFooter({
   t: Strings;
 }) {
   const links = navLinks(t, locale, site.defaultLocale);
-
+  const apps = listApps(locale);
+  const name = site.operator || site.name;
   return (
-    <footer className={styles.footer}>
-      <Starfield
-        seed={FOOTER_SKY_SEED}
-        height="100%"
-        dots={24}
-        sparkles={3}
-        className={styles.footerSky}
-      />
-      <div className={styles.footerInner}>
-        <div className={styles.footerTop}>
-          <div className={styles.footerBrand}>
-            <p className={styles.footerName}>
-              <StarMark className={styles.footerStar} />
-              {site.name}
-            </p>
-            {site.tagline ? <p className={styles.footerLine}>{site.tagline}</p> : null}
+    <footer className={s.footer}>
+      <div className={s.shell}>
+        <div className={s.top}>
+          <div className={s.brand}>
+            <a href={HOME_URL} className={s.name}>
+              <span className={s.symbol}>
+                <StarMark gradientId="footer-brand" />
+              </span>
+              {name}
+            </a>
+            <p>{site.name}</p>
+            <span className={s.caption}>{site.tagline || t.homeLead}</span>
           </div>
-          {/* 머리띠와 **같은 목록**을 읽는다 — 메뉴가 하나 늘면 두 곳이 함께 는다. */}
-          <nav className={styles.footerColumn} aria-label={t.footerNav}>
-            <p className={styles.footerHeading}>{t.footerNav}</p>
-            <div className={styles.footerLinks}>
-              {links.map((link) =>
+          <nav className={s.column} aria-label={t.allApps}>
+            <h2>{t.navApps}</h2>
+            {apps.map((app) => (
+              <Link key={app.slug} href={appPath(locale, app.slug)}>
+                {app.name}
+              </Link>
+            ))}
+          </nav>
+          <nav className={s.column} aria-label={t.footerNav}>
+            <h2>{t.footerNav}</h2>
+            {links
+              .filter((link) => link.key !== "home")
+              .map((link) =>
                 link.isInternal ? (
-                  <Link key={link.key} href={link.href} className={styles.footerLink}>
+                  <Link key={link.key} href={link.href}>
                     {link.label}
                   </Link>
                 ) : (
-                  <a key={link.key} href={link.href} className={styles.footerLink}>
+                  <a key={link.key} href={link.href}>
                     {link.label}
+                    <span aria-hidden="true">↗</span>
                   </a>
                 ),
               )}
-            </div>
           </nav>
-          <div className={styles.footerColumn}>
-            <p className={styles.footerHeading}>{t.footerContact}</p>
-            <p className={styles.footerOperator}>
-              {site.operator ? <span className={styles.operatorName}>{site.operator}</span> : null}
-              {site.contactEmail ? (
-                <a href={`mailto:${site.contactEmail}`} className={styles.footerLink}>
-                  {site.contactEmail}
-                </a>
-              ) : null}
-            </p>
+          <div className={s.column}>
+            <h2>{t.footerContact}</h2>
+            {site.contactEmail && (
+              <a className={s.mail} href={`mailto:${site.contactEmail}`}>
+                {site.contactEmail}
+                <span aria-hidden="true">↗</span>
+              </a>
+            )}
+            <p className={s.invitation}>{name}</p>
+            <nav className={s.social} aria-label="Social">
+              <a
+                href="https://www.instagram.com/twinkle.ai.labs/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Instagram ↗
+              </a>
+              <a href="https://x.com/twinkle_ai_labs" target="_blank" rel="noopener noreferrer">
+                X (Twitter) ↗
+              </a>
+            </nav>
           </div>
         </div>
-        <div className={styles.footerBottom}>
-          <p className={styles.footerCopyright}>© 2026 {site.operator || site.name}</p>
-          <p className={styles.footerMotto}>{site.name}</p>
+        <div className={s.bottom}>
+          <span>
+            © {new Date().getFullYear()} {name}
+          </span>
+          <span className={s.signature}>
+            <StarMark />
+            {site.name}
+          </span>
         </div>
       </div>
     </footer>

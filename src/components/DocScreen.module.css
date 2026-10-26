@@ -1,6 +1,4 @@
 .page {
-  width: 100%;
-  max-width: 60rem;
   margin: 0 auto;
   padding-top: var(--s2);
 }
@@ -13,75 +11,44 @@
   display: inline-flex;
   align-items: center;
   gap: var(--s0);
-  min-height: 2rem;
-  padding: 0 var(--s1h);
-  border: 1px solid color-mix(in srgb, var(--divider) 75%, transparent);
   border-radius: 999px;
-  background: color-mix(in srgb, var(--glass) 72%, transparent);
   color: var(--text-sub);
-  font-size: 0.75rem;
-  font-weight: 700;
-  box-shadow: 0 0.375rem 1.25rem color-mix(in srgb, var(--primary) 7%, transparent);
-  -webkit-backdrop-filter: blur(0.75rem);
-  backdrop-filter: blur(0.75rem);
 }
-.crumb a::before { content: "←"; color: var(--accent); }
-.crumb a:hover { color: var(--accent); text-decoration: none; }
-
-.head { margin-bottom: var(--s3); }
+.crumb a::before {
+  content: "←";
+  color: var(--accent);
+}
+.crumb a:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
 
 .kind {
   display: inline-flex;
   align-items: center;
   gap: var(--s0);
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
   color: var(--accent);
-  background: var(--primary-soft);
-  border-radius: 999px;
-  padding: 0.25rem 0.75rem;
-  margin-bottom: var(--s1h);
-}
-
-.title {
-  font-size: 1.625rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.2;
 }
 
 /* 값마다 제 이름을 단다 — 가운뎃점으로 이어 붙이면 어디서 끊을지 알 수 없다. */
 .facts {
   margin: var(--s2h) 0 0;
   padding: 0;
-  display: flex;
   flex-wrap: wrap;
-  gap: var(--s1) 0;
 }
 
 .fact {
   display: flex;
   flex-direction: column;
-  gap: 0.0625rem;
   padding-right: var(--s3);
 }
 
 /* 사실과 사실 사이는 헤어라인 하나 — 상자를 두르지 않고도 각자 선다. */
 .fact + .fact {
-  padding-left: var(--s3);
   border-left: 1px solid var(--divider);
-}
-.fact dt {
-  font-size: 0.6875rem;
-  font-weight: 600;
-  color: var(--text-faint);
 }
 .fact dd {
   margin: 0;
-  font-size: 0.875rem;
-  font-weight: 600;
   color: var(--text);
   font-variant-numeric: tabular-nums;
 }
@@ -96,7 +63,10 @@
   font-weight: 600;
   line-height: 1.6;
 }
-.notice a { color: inherit; text-decoration: underline; }
+.notice a {
+  color: inherit;
+  text-decoration: underline;
+}
 
 .noticePast {
   background: color-mix(in srgb, var(--warn) 14%, transparent);
@@ -104,23 +74,15 @@
 }
 
 .summary {
-  margin-bottom: var(--s3);
   color: var(--text-sub);
-  font-size: 0.9375rem;
-  line-height: 1.65;
 }
 
 .body {
-  padding-top: var(--s3);
   border-top: 1px solid var(--divider);
 }
 
-.history { margin-top: var(--s5); }
-
 .historyTitle {
   font-size: 0.8125rem;
-  font-weight: 700;
-  color: var(--text-faint);
   letter-spacing: 0.04em;
   margin-bottom: var(--s1h);
 }
@@ -136,18 +98,10 @@
 
 .historyRow {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
   gap: var(--s2);
-  padding: var(--s1h) var(--s2);
-  border-radius: var(--radius-md);
   background: var(--surface);
-  box-shadow: var(--shadow-card);
   color: var(--text-sub);
   font-size: 0.875rem;
-  transition: transform var(--motion-fast) var(--ease-entering),
-    box-shadow var(--motion-fast) var(--ease-entering),
-    color var(--motion-fast) var(--ease-entering);
 }
 
 .historyRow:hover {
@@ -157,8 +111,144 @@
   box-shadow: var(--shadow-lift);
 }
 
-.historyWhen { color: var(--text-faint); font-size: 0.8125rem; }
+.historyWhen {
+  color: var(--text-faint);
+  font-size: 0.8125rem;
+}
 
 @media (min-width: 40em) {
-  .title { font-size: 1.875rem; }
+  .title {
+    font-size: 1.875rem;
+  }
+}
+.page {
+  width: 100%;
+  max-width: 46rem;
+  padding-block: 0.5rem 3rem;
+}
+.crumb {
+  margin-bottom: 1.5rem;
+}
+.crumb a {
+  -webkit-backdrop-filter: blur(0.75rem);
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  font-size: 0.8125rem;
+  font-weight: 400;
+}
+.head {
+  position: relative;
+  padding: 2rem 0;
+  margin-bottom: 1.5rem;
+  border-top: 1px solid var(--divider);
+}
+.head::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0 -2rem;
+  background: radial-gradient(
+    ellipse at 25% 0,
+    color-mix(in srgb, var(--accent) 9%, transparent),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+.kind {
+  text-transform: uppercase;
+  padding: 0;
+  margin-bottom: 1rem;
+  background: none;
+  border-radius: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+.title {
+  font-size: clamp(1.9rem, 4vw, 2.65rem);
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: -0.045em;
+}
+.facts {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+.fact {
+  gap: 0.4rem;
+  padding: 0;
+  min-width: 0;
+}
+.fact + .fact {
+  padding-left: 1.25rem;
+}
+.fact dt {
+  color: var(--text-sub);
+  font-size: 0.6875rem;
+  font-weight: 400;
+}
+.fact dd {
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+.summary {
+  margin-bottom: 2rem;
+  padding: 1.25rem 1.5rem;
+  border-left: 2px solid var(--accent);
+  background: color-mix(in srgb, var(--primary-soft) 40%, transparent);
+  border-radius: 0 14px 14px 0;
+  font-size: 0.9375rem;
+  line-height: 1.85;
+}
+.body {
+  padding-top: 2rem;
+}
+.history {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--divider);
+}
+.historyTitle {
+  color: var(--text-sub);
+  font-weight: 500;
+}
+.historyRow {
+  align-items: center;
+  justify-content: space-between;
+  transition:
+    transform var(--motion-fast) var(--ease-entering),
+    box-shadow var(--motion-fast) var(--ease-entering),
+    color var(--motion-fast) var(--ease-entering);
+  border: 1px solid var(--divider);
+  box-shadow: none;
+  padding: 1rem 1.25rem;
+  border-radius: 14px;
+  flex-wrap: wrap;
+}
+@media (max-width: 520px) {
+  .head {
+    padding-block: 1.5rem;
+  }
+  .head::before {
+    inset-inline: 0;
+  }
+  .facts {
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  .fact + .fact {
+    padding-left: 0.75rem;
+  }
+  .fact dd {
+    font-size: 0.75rem;
+  }
+  .summary {
+    padding: 1rem 1.1rem;
+  }
 }

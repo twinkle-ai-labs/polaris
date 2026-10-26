@@ -1,4 +1,6 @@
-.wrap { position: relative; }
+.wrap {
+  position: relative;
+}
 
 .trigger {
   width: 100%;
@@ -16,16 +18,24 @@
   cursor: pointer;
   transition: border-color var(--motion-fast) var(--ease-entering);
 }
-.trigger:hover { border-color: var(--divider); }
+.trigger:hover {
+  border-color: var(--divider);
+}
 
-.value { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 .chevron {
   font-size: 0.75rem;
   color: var(--text-faint);
   transition: transform var(--motion-fast) var(--ease-entering);
 }
-.chevronUp { transform: rotate(180deg); }
+.chevronUp {
+  transform: rotate(180deg);
+}
 
 .menu {
   position: absolute;
@@ -45,8 +55,14 @@
 }
 
 @keyframes drop {
-  from { opacity: 0; transform: translateY(-0.25rem); }
-  to { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translateY(-0.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .option {
@@ -64,5 +80,10 @@
   text-align: left;
   cursor: pointer;
 }
-.option:hover { background: var(--sunken); }
-.optionOn { color: var(--accent); font-weight: 700; }
+.option:hover {
+  background: var(--sunken);
+}
+.optionOn {
+  color: var(--accent);
+  font-weight: 700;
+}

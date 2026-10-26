@@ -33,7 +33,13 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
     /* 검색 결과의 미리보기를 우리가 줄이지 않는다 — 기본값은 짧게 자르는 쪽이다. */
-    googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large", "max-video-preview": -1 },
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
   },
   formatDetection: { telephone: false, address: false, email: false },
 };

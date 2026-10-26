@@ -43,8 +43,12 @@ export const { choiceRegistered, choiceToggled, choiceClosed, choicePicked } = c
 export default choiceSlice.reducer;
 
 /** 아직 알리기 전이면 `undefined` — 부르는 쪽이 제 기본값으로 받는다(첫 그림이 비지 않게). */
-export const selectChoiceValue = (id: string) => (state: RootState): string | undefined =>
-  state.choice.fields[id]?.value;
+export const selectChoiceValue =
+  (id: string) =>
+  (state: RootState): string | undefined =>
+    state.choice.fields[id]?.value;
 
-export const selectIsChoiceOpen = (id: string) => (state: RootState): boolean =>
-  state.choice.fields[id]?.isOpen ?? false;
+export const selectIsChoiceOpen =
+  (id: string) =>
+  (state: RootState): boolean =>
+    state.choice.fields[id]?.isOpen ?? false;

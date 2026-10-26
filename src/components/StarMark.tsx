@@ -20,13 +20,7 @@ export default function StarMark({
        viewBox 만 있는 svg 는 제 칸을 통째로 채워 화면을 삼키기 때문이다.
        실제로 404 화면에서 별 하나가 창을 다 덮은 적이 있다.
        CSS 의 width/height 는 이 속성을 이긴다. */
-    <svg
-      className={className}
-      viewBox="0 0 100 100"
-      width="1em"
-      height="1em"
-      aria-hidden="true"
-    >
+    <svg className={className} viewBox="0 0 100 100" width="1em" height="1em" aria-hidden="true">
       {gradientId ? (
         <defs>
           <linearGradient
@@ -42,10 +36,7 @@ export default function StarMark({
           </linearGradient>
         </defs>
       ) : null}
-      <path
-        d={STAR_PATH}
-        fill={gradientId ? `url(#${gradientId})` : "currentColor"}
-      />
+      <path d={STAR_PATH} fill={gradientId ? `url(#${gradientId})` : "currentColor"} />
     </svg>
   );
 }

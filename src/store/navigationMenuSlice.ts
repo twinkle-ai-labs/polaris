@@ -17,4 +17,5 @@ const navigationMenuSlice = createSlice({
 
 export const { navigationMenuToggled, navigationMenuClosed } = navigationMenuSlice.actions;
 export default navigationMenuSlice.reducer;
-export const selectIsNavigationMenuOpen = (state: RootState): boolean => state.navigationMenu.isOpen;
+export const selectIsNavigationMenuOpen = (state: RootState): boolean =>
+  state.navigationMenu.isOpen;

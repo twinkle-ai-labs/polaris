@@ -36,9 +36,15 @@ export const CURRENT_NAV_KEY = "terms";
 export function navLinks(t: Strings, locale: string, defaultLocale: string): NavLink[] {
   return [
     { key: "home", label: t.navHome, href: HOME_URL, isInternal: false },
+    { key: "apps", label: t.navApps, href: `${HOME_URL}app/`, isInternal: false },
     { key: "design", label: t.navDesign, href: DESIGN_URL, isInternal: false },
     { key: "blog", label: t.navBlog, href: BLOG_URL, isInternal: false },
-    { key: CURRENT_NAV_KEY, label: t.navTerms, href: localeHome(locale, defaultLocale), isInternal: true },
+    {
+      key: CURRENT_NAV_KEY,
+      label: t.navTerms,
+      href: localeHome(locale, defaultLocale),
+      isInternal: true,
+    },
   ];
 }
 

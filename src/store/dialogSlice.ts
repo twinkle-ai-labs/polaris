@@ -28,5 +28,7 @@ const dialogSlice = createSlice({
 export const { dialogOpened, dialogClosed } = dialogSlice.actions;
 export default dialogSlice.reducer;
 
-export const selectIsDialogOpen = (id: string) => (state: RootState): boolean =>
-  state.dialog.openDialogId === id;
+export const selectIsDialogOpen =
+  (id: string) =>
+  (state: RootState): boolean =>
+    state.dialog.openDialogId === id;

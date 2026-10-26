@@ -32,7 +32,9 @@ export default async function AdminApp({ params }: { params: Promise<{ app: stri
       <div className={styles.head}>
         <div>
           <h1 className={styles.title}>{meta.name}</h1>
-          <p className={styles.subtitle}>/{meta.defaultLocale}/{meta.slug}/</p>
+          <p className={styles.subtitle}>
+            /{meta.defaultLocale}/{meta.slug}/
+          </p>
         </div>
         <Link href={`/${meta.defaultLocale}/${meta.slug}/`} className={styles.ghost}>
           공개 화면 보기

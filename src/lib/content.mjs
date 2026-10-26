@@ -83,7 +83,13 @@ function dirs(where) {
 export function pick(value, locale, fallbackLocale = "ko") {
   if (value == null) return "";
   if (typeof value === "string") return value;
-  return value[locale] ?? value[String(locale).split("-")[0]] ?? value[fallbackLocale] ?? Object.values(value)[0] ?? "";
+  return (
+    value[locale] ??
+    value[String(locale).split("-")[0]] ??
+    value[fallbackLocale] ??
+    Object.values(value)[0] ??
+    ""
+  );
 }
 
 export function readSite(locale) {
@@ -106,12 +112,17 @@ export function readSite(locale) {
 
 export function listApps(locale) {
   // 표시 언어가 달라져도 제품의 노출 순서는 유지한다.
-  const order = new Map(["stock-calculator", "pocket-pdf", "exchange-rate"].map((slug, i) => [slug, i]));
+  const order = new Map(
+    ["stock-calculator", "pocket-pdf", "exchange-rate"].map((slug, i) => [slug, i]),
+  );
   return dirs(APPS_DIR)
     .map((slug) => readApp(slug, locale))
     .filter(Boolean)
-    .sort((a, b) => (order.get(a.slug) ?? Infinity) - (order.get(b.slug) ?? Infinity)
-      || a.name.localeCompare(b.name, locale || "ko"));
+    .sort(
+      (a, b) =>
+        (order.get(a.slug) ?? Infinity) - (order.get(b.slug) ?? Infinity) ||
+        a.name.localeCompare(b.name, locale || "ko"),
+    );
 }
 
 export function readApp(slug, locale) {
@@ -119,9 +130,7 @@ export function readApp(slug, locale) {
   if (!fs.existsSync(file)) return null;
   const meta = readJson(file, {});
   const at = locale ?? "ko";
-  const icon = fs.existsSync(path.join(ICONS_DIR, `${slug}.png`))
-    ? `/apps/${slug}.png`
-    : "";
+  const icon = fs.existsSync(path.join(ICONS_DIR, `${slug}.png`)) ? `/apps/${slug}.png` : "";
   return {
     slug,
     name: pick(meta.name, at) || slug,
@@ -227,7 +236,13 @@ export function currentVersion(appSlug, docSlug, locale, now = today()) {
   return (
     listVersions(appSlug, docSlug, locale)
       .filter((v) => v.status === "published" && v.effectiveAt && v.effectiveAt <= now)
-      .sort((a, b) => (a.effectiveAt < b.effectiveAt ? 1 : a.effectiveAt > b.effectiveAt ? -1 : b.version - a.version))[0] || null
+      .sort((a, b) =>
+        a.effectiveAt < b.effectiveAt
+          ? 1
+          : a.effectiveAt > b.effectiveAt
+            ? -1
+            : b.version - a.version,
+      )[0] || null
   );
 }
 
