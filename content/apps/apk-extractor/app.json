@@ -1,0 +1,10 @@
+{
+  "name": {
+    "ko": "APK 추출기"
+  },
+  "description": {
+    "ko": "기기에 설치된 앱을 설치 파일(APK)로 꺼내 저장하거나 공유하는 앱. 분할 설치된 앱은 .apks 파일 하나로 묶는다."
+  },
+  "defaultLocale": "ko",
+  "homepage": ""
+}
